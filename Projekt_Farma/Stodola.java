@@ -13,8 +13,27 @@ public class Stodola {
 
     public Stodola()
     {
-        produkty.put(new Produkt("Pszenica",true,20,30,"ad1"),0);
-        produkty.put(new Produkt("Jablko",true,10,15,"ad2"),0);
+        //rośliny paszowe
+        produkty.put(new Produkt("pszenica",true,20,10,"ad"),0);
+        produkty.put(new Produkt("żyto", true, 22, 10, "ad3"), 0);
+        //owoce
+        produkty.put(new Produkt("jabłka",true,10,15,"ad"),0);
+        produkty.put(new Produkt ("gruszki", true, 12, 15, "ad"), 0);
+        produkty.put(new Produkt("winogrona", true, 15, 15, "ad"), 0);
+        //odzwierzęce
+        produkty.put(new Produkt("mleko", true, 15, 10, "ad"), 0);
+        produkty.put(new Produkt("jajka", true, 16, 10, "ad"), 0);
+        produkty.put(new Produkt("mięso", true, 25, 10,"ad"), 0);
+        //przetwory
+        produkty.put(new Produkt("chleb pszenny", true, 44, 10, "ad"), 0);
+        produkty.put(new Produkt("chleb żytni", true, 45, 10, "ad"), 0);
+        produkty.put(new Produkt("dżem jabłkowy", true, 37, 8, "ad"), 0);
+        produkty.put(new Produkt("dżem gruszkowy", true, 38, 8, "ad"), 0);
+        produkty.put(new Produkt("sok jabłkowy", true, 35, 9, "ad"), 0);
+        produkty.put(new Produkt("sok gruszkowy", true, 36, 9, "ad"), 0);
+        produkty.put(new Produkt("masło", true, 40, 10, "ad"), 0);
+        produkty.put(new Produkt("szynka", true, 55, 12, "ad"), 0);
+        produkty.put(new Produkt("kiełbasa", true, 56, 12, "ad"), 0);
     }
 
     public static void dodajProdukt(Produkt p)
