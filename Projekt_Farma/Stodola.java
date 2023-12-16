@@ -43,4 +43,17 @@ public class Stodola {
         }
     }
 
+    public int sprawdzDostepnosc(String nazwa)
+    {
+        Set<Map.Entry<Produkt, Integer>> entries = produkty.entrySet();
+        Iterator<Map.Entry<Produkt, Integer>> iteratorProduktow = entries.iterator();
+        while (iteratorProduktow.hasNext())
+        {
+            Map.Entry<Produkt, Integer> entry = iteratorProduktow.next();
+            if (nazwa.equals(entry.getKey().getNazwa()))
+                return entry.getValue();
+        }
+        return 0;
+    }
+
 }
