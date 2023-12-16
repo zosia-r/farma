@@ -1,6 +1,6 @@
 package Zboża;
-import Uprawy.Uprawy;
-public class Zboża extends Uprawy
+import Pole.Uprawa;
+public class Zboża extends Uprawa
 {
     private String nazwa;
     private float szansanaZwiędnięcie;
