@@ -1,12 +1,11 @@
-package Kawałek_Ziemi;
-import Farma.Farma;
+package Kawalek_Ziemi;
 
-public abstract class Kawałek_Ziemi extends Farma
+public class Kawalek_Ziemi
 {
     private int x;  // pierwsza współrzędna kawałka
     private int y;  // druga współrzędna kawałka
 
-    public Kawałek_Ziemi(int x, int y)
+    public Kawalek_Ziemi(int x, int y)
     {
         this.x=x;
         this.y=y;
@@ -29,7 +28,7 @@ public abstract class Kawałek_Ziemi extends Farma
     }
     public void getStan()
     {
-        super.getStan();
         System.out.println("Współrzędne punktu to: ("+getX()+","+getY()+")");
     }
 }
+
