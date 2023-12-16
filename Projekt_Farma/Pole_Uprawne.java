@@ -1,7 +1,7 @@
 package Kawalek_Ziemi;
 import Pole.Uprawa;
 
-public abstract class Pole_Uprawne extends Kawalek_Ziemi
+public class Pole_Uprawne extends Kawalek_Ziemi
 {
     private Uprawa uprawa;
 
