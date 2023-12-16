@@ -8,8 +8,9 @@ public class Gra
     private Farma farmaGracza; // farma gracza
     public Gra()
     {
-        liczbaMonet=200;
-        pozostalyCzas=300;
+        this.liczbaMonet=200;
+        this.pozostalyCzas=300;
+        this.farmaGracza = new Farma();
     }
     public Gra(int liczbaMonet, int pozostalyCzas, Farma farmaGracza)
     {
