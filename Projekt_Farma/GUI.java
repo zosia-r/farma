@@ -11,15 +11,18 @@ import java.awt.event.ActionListener;
 class GUI extends JFrame {
     private static final int wymiarFarmy = 5;
 
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            GUI frame = new GUI();
-            frame.setTitle("Interfejs Graficzny Farmy");
-            frame.setSize(400, 400);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.createAndShowGUI();
-        });
-    }
+    public GUI() {
+		init();
+	}
+	
+	private void init() {
+		setTitle("Interfejs Graficzny Farmy");
+		setSize(400, 400);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		createAndShowGUI();
+	}
 
     private void createAndShowGUI() {
         JPanel panel = new JPanel(new GridLayout(wymiarFarmy, wymiarFarmy));
