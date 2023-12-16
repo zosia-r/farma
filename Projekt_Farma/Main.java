@@ -25,7 +25,7 @@ public class Main {
 
         // Uruchomienie GUI
         GUI gui = new GUI();
-		gui.setVisible(true);
+	gui.setVisible(true);
 
         //tworzenie stodoly i dodawanie do niej produktow
         Stodola stodola = new Stodola();
