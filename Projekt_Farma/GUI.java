@@ -1,4 +1,5 @@
 import Farma.Farma;
+import Kawalek_Ziemi.Kawalek_Ziemi;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,7 +30,7 @@ class GUI extends JFrame {
         // Dodawanie przycisków do panelu
         for (int i = 0; i < wymiarFarmy; i++) {
             for (int j = 0; j < wymiarFarmy; j++) {
-                JButton button = createButton(farma.getKawałki_ziemi()[i][j]);
+                JButton button = createButton(farma.getKawalki_ziemi()[i][j]);
                 panel.add(button);
             }
         }
@@ -40,7 +41,7 @@ class GUI extends JFrame {
         this.setVisible(true);
     }
 
-    private JButton createButton(int kawałekZiemi) {
+    private JButton createButton(Kawalek_Ziemi kawalekZiemi) {
         JButton button = new JButton();
         Farma farma = new Farma("Moja Farma", wymiarFarmy);
         // Ustawianie akcji po kliknięciu przycisku
@@ -48,7 +49,7 @@ class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Wyświetlanie informacji na temat kawałka ziemi po kliknięciu
-                System.out.println("Jest to pole: "+farma.getKawałki_ziemi());
+                System.out.println("Jest to pole: "+farma.getKawalki_ziemi());
             }
         });
 
