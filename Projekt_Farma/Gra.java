@@ -4,26 +4,26 @@ import Farma.Farma;
 public class Gra
 {
     private int liczbaMonet;   // 200 na początku gry
-    private int pozostałyCzas; // w sekundach
+    private int pozostalyCzas; // w sekundach
     private Farma farmaGracza; // farma gracza
     public Gra()
     {
         liczbaMonet=200;
-        pozostałyCzas=300;
+        pozostalyCzas=300;
     }
-    public Gra(int liczbaMonet, int pozostałyCzas, Farma farmaGracza)
+    public Gra(int liczbaMonet, int pozostalyCzas, Farma farmaGracza)
     {
         this.liczbaMonet=liczbaMonet;
-        this.pozostałyCzas=pozostałyCzas;
+        this.pozostalyCzas=pozostalyCzas;
         this.farmaGracza=farmaGracza;
     }
     public int getLiczbaMonet()
     {
         return liczbaMonet;
     }
-    public int getPozostałyCzas()
+    public int getPozostalyCzas()
     {
-        return pozostałyCzas;
+        return pozostalyCzas;
     }
     public Farma getFarmaGracza()
     {
@@ -33,9 +33,9 @@ public class Gra
     {
         this.liczbaMonet=liczbaMonet;
     }
-    public void setPozostałyCzas(int pozostałyCzas)
+    public void setPozostalyCzas(int pozostalyCzas)
     {
-        this.pozostałyCzas=pozostałyCzas;
+        this.pozostalyCzas=pozostalyCzas;
     }
     public void setFarmaGracza(Farma farmaGracza)
     {
@@ -44,24 +44,24 @@ public class Gra
     public void getStan()
     {
         System.out.println("Obecna liczba monet: "+getLiczbaMonet());
-        System.out.println("Pozostały czas gry: "+getPozostałyCzas()+" sekund");
+        System.out.println("Pozostały czas gry: "+getPozostalyCzas()+" sekund");
 
     }
     public void rozpocznijGre()
     {
 
     }
-    public void odejmijMonety(int ilośćMonet) {
-        if (ilośćMonet > 0 && ilośćMonet <= liczbaMonet) {
-            liczbaMonet -= ilośćMonet;
+    public void odejmijMonety(int iloscMonet) {
+        if (iloscMonet > 0 && iloscMonet <= liczbaMonet) {
+            liczbaMonet -= iloscMonet;
         } else {
             System.out.println("Nieprawidłowa ilość monet do odjęcia.");
         }
     }
 
-    public void odejmijCzas(int ilośćSekund) {
-        if (ilośćSekund > 0 && ilośćSekund <= pozostałyCzas) {
-            pozostałyCzas -= ilośćSekund;
+    public void odejmijCzas(int iloscSekund) {
+        if (iloscSekund > 0 && iloscSekund <= pozostalyCzas) {
+            pozostalyCzas -= iloscSekund;
         } else {
             System.out.println("Nieprawidłowa ilość czasu do odjęcia.");
         }
