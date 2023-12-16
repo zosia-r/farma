@@ -1,4 +1,4 @@
-import Zboża.Zboża;
+
 import Stodola.Stodola;
 import Produkt.Produkt;
 
@@ -22,8 +22,10 @@ public class Main {
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        // Wyświetlamy ramkę
 //        frame.setVisible(true);
-        Zboża zboże1 = new Zboża();
-        zboże1.getStan();
+
+        // Uruchomienie GUI
+        GUI gui = new GUI();
+		gui.setVisible(true);
 
         //tworzenie stodoly i dodawanie do niej produktow
         Stodola stodola = new Stodola();
