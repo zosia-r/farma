@@ -23,8 +23,10 @@ public class Main {
 //        // Wyświetlamy ramkę
 //        frame.setVisible(true);
 
+	Gra gra = new Gra();
+	    
         // Uruchomienie GUI
-        GUI gui = new GUI();
+        GUI gui = new GUI(gra);
 	gui.setVisible(true);
 
         //tworzenie stodoly i dodawanie do niej produktow
