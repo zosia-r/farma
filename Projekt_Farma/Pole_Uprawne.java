@@ -11,19 +11,25 @@ public class Pole_Uprawne extends Kawalek_Ziemi
         uprawa=null;
     }
 
-
-
-    public void zasadzUprawe(Uprawa nowaUprawa)
+    public void zasadz(Uprawa uprawa)
     {
-        if(uprawa==null)
+        try
         {
-            uprawa=nowaUprawa;
-            System.out.println("Zasadzono uprawę na polu uprawnym");
+            zasadzUprawe(uprawa);
         }
-        else
+        catch (FieldNotEmptyException e)
         {
-            System.out.println("to pole jest juz zasiane");
+            System.err.println(e.getMessage() + this.uprawa.getNazwa());
         }
+    }
+    
+    public void zasadzUprawe(Uprawa uprawa) throws FieldNotEmptyException
+    {
+        if (this.uprawa != null)
+            throw new FieldNotEmptyException();
+        this.uprawa = uprawa;
+        System.out.println("zasadzono uprawę :D");
+
     }
 
     public void zbierzUprawe()
