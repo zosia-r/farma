@@ -1,32 +1,61 @@
 import Farma.Farma;
+import Gra.Gra;
 import Kawalek_Ziemi.Kawalek_Ziemi;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class GUI extends JFrame {
-    private static final int wymiarFarmy = 5;
-
-    public GUI() {
+	private int wymiarFarmy;
+	private final int szerokoscFarmy = 400;
+	private final int szerokoscEkranu = szerokoscFarmy;
+	private final int wysokoscFarmy = 400;
+	private final int wysokoscPaskaInformacyjnego = 100;
+	private final int wysokoscEkranu = wysokoscFarmy + wysokoscPaskaInformacyjnego;
+	
+    Gra gra;
+    
+    public GUI(Gra gra) {
+    	this.gra = gra;
+    	this.wymiarFarmy = gra.getFarmaGracza().getWymiar();
 		init();
 	}
 	
 	private void init() {
 		setTitle("Interfejs Graficzny Farmy");
-		setSize(400, 400);
+		setSize(szerokoscEkranu, wysokoscEkranu);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
+		
 		createAndShowGUI();
 	}
 
-    private void createAndShowGUI() {
-        JPanel panel = new JPanel(new GridLayout(wymiarFarmy, wymiarFarmy));
 
+	private void createAndShowGUI() {
+        GUI_Farma();
+        
+        GUI_PasekInformacyjny();
+
+        this.setVisible(true);
+    }
+	
+	private void GUI_Farma() {
+		JPanel panel = new JPanel(new GridLayout(wymiarFarmy, wymiarFarmy));
+        
+        panel.setPreferredSize(new Dimension(szerokoscFarmy,wysokoscFarmy));
+        
         // Tworzenie farmy
         Farma farma = new Farma("Moja Farma", wymiarFarmy);
 
@@ -37,13 +66,38 @@ class GUI extends JFrame {
                 panel.add(button);
             }
         }
+        // Dodawanie panelu do ramki
+        this.add(panel,BorderLayout.CENTER);
+        
+	}
+	
+	private void GUI_PasekInformacyjny() {
+		// Tworzenie gornego pasaka z informacjami
+        JPanel panel_informacje = new JPanel();
+        panel_informacje.setPreferredSize(new Dimension(szerokoscEkranu,wysokoscPaskaInformacyjnego));
+        
+        JLabel tekst = new JLabel("Nazwa Farmy: "+ gra.getFarmaGracza().getNazwaFarmy( )
+        							+ ", Monety = " + gra.getLiczbaMonet());
+        							// + ", Pozostaly czas: " + gra.getPozostalyCzas());
+        tekst.setPreferredSize(new Dimension(szerokoscEkranu, wysokoscPaskaInformacyjnego/2));
+        tekst.setFont(new Font(null, Font.BOLD, 20));
+        tekst.setHorizontalAlignment(JLabel.CENTER);
+        tekst.setVerticalAlignment(JLabel.CENTER);
+        panel_informacje.add(tekst);
+        
+        JButton buttonStodola = new JButton("Stodola");
+        panel_informacje.add(buttonStodola);
+        
+        // Dodajemy obsługę zdarzeń (event listener) do przycisku
+        buttonStodola.addActionListener(e -> {
+        // Wyświetlamy komunikat po kliknięciu przycisku
+        JOptionPane.showMessageDialog(this, "under construction");
+        });
 
         // Dodawanie panelu do ramki
-        this.add(panel);
-
-        this.setVisible(true);
-    }
-
+        this.add(panel_informacje,BorderLayout.NORTH);
+	}
+	
     private JButton createButton(Kawalek_Ziemi kawalekZiemi) {
         JButton button = new JButton();
         Farma farma = new Farma("Moja Farma", wymiarFarmy);
