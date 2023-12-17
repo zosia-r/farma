@@ -10,7 +10,7 @@ public class Farma
     public Farma()
     {
         nazwaFarmy="FARMA";
-        wymiar=20;
+        wymiar=5;
         kawalki_ziemi = new Kawalek_Ziemi[wymiar][wymiar];
     }
     public Farma(String nazwaFarmy, int wymiar)
