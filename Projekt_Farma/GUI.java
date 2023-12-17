@@ -106,7 +106,7 @@ class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Wyświetlanie informacji na temat kawałka ziemi po kliknięciu
-                System.out.println("Jest to pole: "+farma.getKawalki_ziemi());
+                System.out.println("Jest to pole: "+((button.getY()-1)/72+1)+", "+(button.getX()/77+1));
             }
         });
 
