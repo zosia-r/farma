@@ -1,5 +1,6 @@
 package Kawalek_Ziemi;
 import Pole.Uprawa;
+import Obserwator.Obserwator;
 
 public class Pole_Uprawne extends Kawalek_Ziemi
 {
@@ -69,4 +70,15 @@ public class Pole_Uprawne extends Kawalek_Ziemi
     {
         this.uprawa=uprawa;
     }
+
+    //podmiot
+    public void powiadomObserwatorow()
+    {
+        for(int i=0;i<getObserwatorzy().size();i++)
+        {
+            Obserwator obs = (Obserwator) getObserwatorzy().get(i);
+            obs.aktualizacja(uprawa.getNazwa(),uprawa.getGotoweDoZebrania(),uprawa.getCzasProdukcji(),uprawa.getIkonka());
+        }
+    }
+    
 }
