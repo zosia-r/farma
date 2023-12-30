@@ -10,8 +10,8 @@ public class Przetwor extends Produkt {
     private Timer odliczanieTimer;
     private Timer wzrostTimer;
 
-    public Przetwor(String nazwa, boolean gotoweDoZebrania, int cena, int czasProdukcji, String adresIkonki, Produkt ProduktPotrzebnyDoWyprodukowania, int iloscPotrzebnegoProduktu) {
-        super(nazwa, gotoweDoZebrania, cena, czasProdukcji, adresIkonki);
+    public Przetwor(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki, Produkt ProduktPotrzebnyDoWyprodukowania, int iloscPotrzebnegoProduktu) {
+        super(nazwa, gotoweDoZebrania, cena, cenaWytworzenia, czasProdukcji, adresIkonki);
         int l = Stodola.sprawdzDostepnosc(ProduktPotrzebnyDoWyprodukowania.getNazwa());
         if (l >= iloscPotrzebnegoProduktu) {
             uruchomLicznikCzasu();
