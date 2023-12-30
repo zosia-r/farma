@@ -3,20 +3,21 @@ import Farma.Farma;
 
 public class Gra
 {
+    private static Gra instance;
     private int liczbaMonet;   // 200 na początku gry
     private int pozostalyCzas; // w sekundach
     private Farma farmaGracza; // farma gracza
-    public Gra()
+    private Gra()
     {
-        this.liczbaMonet=200;
-        this.pozostalyCzas=300;
-        this.farmaGracza = new Farma();
+        this.liczbaMonet = 200;
+        this.pozostalyCzas = 300;
+        this.farmaGracza = Farma.getInstance();
     }
-    public Gra(int liczbaMonet, int pozostalyCzas, Farma farmaGracza)
+    public static Gra getInstance()
     {
-        this.liczbaMonet=liczbaMonet;
-        this.pozostalyCzas=pozostalyCzas;
-        this.farmaGracza=farmaGracza;
+        if (instance == null)
+            instance = new Gra();
+        return instance;
     }
     public int getLiczbaMonet()
     {
@@ -50,21 +51,14 @@ public class Gra
     }
     public void rozpocznijGre()
     {
-
+        //zapytanie o nazwe farmy
+        //podział na typy zagospodarowania
     }
     public void odejmijMonety(int iloscMonet) {
         if (iloscMonet > 0 && iloscMonet <= liczbaMonet) {
             liczbaMonet -= iloscMonet;
         } else {
             System.out.println("Nieprawidłowa ilość monet do odjęcia.");
-        }
-    }
-
-    public void odejmijCzas(int iloscSekund) {
-        if (iloscSekund > 0 && iloscSekund <= pozostalyCzas) {
-            pozostalyCzas -= iloscSekund;
-        } else {
-            System.out.println("Nieprawidłowa ilość czasu do odjęcia.");
         }
     }
 
