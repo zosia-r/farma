@@ -50,6 +50,20 @@ public class Stodola {
             }
         }
     }
+    public static void usunProdukt(Produkt p)
+    {
+        Set<Map.Entry<Produkt,Integer>> entries = produkty.entrySet();
+        Iterator<Map.Entry<Produkt,Integer>> iteratorProduktow = entries.iterator();
+        while(iteratorProduktow.hasNext())
+        {
+            Map.Entry<Produkt,Integer> entry = iteratorProduktow.next();
+            if(p.getNazwa().equals(entry.getKey().getNazwa()) && entry.getValue() > 0)
+            {
+                entry.setValue(entry.getValue() - 1);
+                break;
+            }
+        }
+    }
 
     public void wyswietlProdukty()
     {
@@ -62,7 +76,7 @@ public class Stodola {
         }
     }
 
-    public int sprawdzDostepnosc(String nazwa)
+    public static int sprawdzDostepnosc(String nazwa)
     {
         Set<Map.Entry<Produkt, Integer>> entries = produkty.entrySet();
         Iterator<Map.Entry<Produkt, Integer>> iteratorProduktow = entries.iterator();
