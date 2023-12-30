@@ -67,7 +67,8 @@ public class Zagroda extends Kawalek_Ziemi implements Rzeznik {
 	        System.out.println("W tej zagrodzie nie ma produktow do zebrania.");
 	    }
 	            }
-	
+
+//podmiot
 	public void powiadomObserwatorow()
     {
         for(int i=0;i<getObserwatorzy().size();i++)
