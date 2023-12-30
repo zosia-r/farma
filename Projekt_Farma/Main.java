@@ -1,48 +1,35 @@
 
+import Kawalek_Ziemi.Pole_Uprawne;
 import Stodola.Stodola;
-import Gra.Gra;
 import Produkt.Produkt;
+import Pole.*;
+import GUI.*;
 
 public class Main {
     public static void main(String[] args)
     {
-//        // Tworzymy ramkę (okno)
-//        JFrame frame = new JFrame("Prosty Interfejs Graficzny");
-//        // Tworzymy przycisk
-//        JButton button = new JButton("Gra farma!");
-//        // Dodajemy obsługę zdarzeń (event listener) do przycisku
-//        button.addActionListener(e -> {
-//            // Wyświetlamy komunikat po kliknięciu przycisku
-//            JOptionPane.showMessageDialog(frame, "under construction");
-//        });
-//        // Dodajemy przycisk do ramki
-//        frame.getContentPane().add(button);
-//        // Ustawiamy rozmiar ramki
-//        frame.setSize(300, 200);
-//        // Ustawiamy operację zamknięcia ramki
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        // Wyświetlamy ramkę
-//        frame.setVisible(true);
-
-	Gra gra = new Gra();
-	    
-        // Uruchomienie GUI
-        GUI gui = new GUI(gra);
-	gui.setVisible(true);
-
         //tworzenie stodoly i dodawanie do niej produktow
-        Stodola stodola = new Stodola();
-        stodola.wyswietlProdukty();
+        Stodola.getInstance();
+        Stodola.getInstance().wyswietlProdukty();
 
-        Produkt produkt1 = new Produkt("Pszenica",false,20,30,"adres");
+        Produkt produkt1 = new Produkt("pszenica",false,20,30,"adres");
         produkt1.zbierz();
         produkt1.setGotoweDoZebrania(true);
         produkt1.zbierz();
 
-        Produkt produkt2 = new Produkt("Jablko",true,10,15,"adres");
+        Produkt produkt2 = new Produkt("jabłka",true,10,15,"adres");
         produkt2.zbierz();
 
-        stodola.wyswietlProdukty();
+        Stodola.getInstance().wyswietlProdukty();
+
+        Pole_Uprawne p = new Pole_Uprawne(1, 2);
+        Owoc o = new Owoc("jabłko", true, 2, 1, "a", true, true);
+        p.zasadz(o);
+        p.zasadz(o);
+
+
+        ////
+        Start start = new Start();
+
     }
 }
-
