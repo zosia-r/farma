@@ -8,9 +8,9 @@ public abstract class Uprawa extends Produkt
     private Timer odliczanieTimer;
     private Timer wzrostTimer;
 
-    public Uprawa(String nazwa, boolean gotoweDoZebrania, int cena, int czasProdukcji, String adresIkonki)
+    public Uprawa(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki)
     {
-        super(nazwa, gotoweDoZebrania, cena, czasProdukcji, adresIkonki);
+        super(nazwa, gotoweDoZebrania, cena, cenaWytworzenia, czasProdukcji, adresIkonki);
         uruchomLicznikCzasu();
         uruchomLicznikOdliczania();
 
@@ -54,3 +54,4 @@ public abstract class Uprawa extends Produkt
 
     }
 }
+
