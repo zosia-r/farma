@@ -38,7 +38,7 @@ public class Produkt {
     public void zbierz()
     {
         if(gotoweDoZebrania) {
-            Stodola.dodajProdukt(this);
+            Stodola.getInstance().dodajProdukt(this);
             //usuwanie z tablicy upraw/zwierzat/przetworow
         }
         else
