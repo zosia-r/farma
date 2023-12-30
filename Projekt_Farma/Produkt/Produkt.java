@@ -8,14 +8,16 @@ public class Produkt {
     private String nazwa;
     private boolean gotoweDoZebrania;
     private int cena;
+    private int cenaWytworzenia;
     private int czasProdukcji;
     private File ikonka;
 
-    public Produkt(String nazwa, boolean gotoweDoZebrania, int cena, int czasProdukcji, String adresIkonki)
+    public Produkt(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki)
     {
         this.nazwa=nazwa;
         this.gotoweDoZebrania=gotoweDoZebrania;
         this.cena=cena;
+        this.cenaWytworzenia = cenaWytworzenia;
         this.czasProdukcji=czasProdukcji;
         ikonka = new File(adresIkonki);
     }
@@ -23,6 +25,7 @@ public class Produkt {
     public String getNazwa() { return nazwa; }
     public boolean getGotoweDoZebrania() { return gotoweDoZebrania; }
     public int getCena() { return cena; }
+    public int getCenaWytworzenia { return cenaWytworzenia; }
     public int getCzasProdukcji() { return czasProdukcji; }
     public File getIkonka() { return ikonka; }
 
