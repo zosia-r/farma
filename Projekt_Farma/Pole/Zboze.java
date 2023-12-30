@@ -4,9 +4,9 @@ public class Zboze extends Uprawa
 {
     private boolean czyPasza;
 
-    public Zboze(String nazwa, boolean gotoweDoZebrania, int cena, int czasProdukcji, String adresIkonki,boolean czyPasza)
+    public Zboze(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki,boolean czyPasza)
     {
-        super(nazwa, gotoweDoZebrania, cena, czasProdukcji, adresIkonki);
+        super(nazwa, gotoweDoZebrania, cena, cenaWytworzenia, czasProdukcji, adresIkonki);
         this.czyPasza = czyPasza;
     }
 
