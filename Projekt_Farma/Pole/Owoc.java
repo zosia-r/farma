@@ -5,9 +5,9 @@ public class Owoc extends Uprawa {
     private boolean naSok;
     private boolean naDzem;
 
-    public Owoc(String nazwa, boolean gotoweDoZebrania, int cena, int czasProdukcji, String adresIkonki, boolean naSok, boolean naDzem)
+    public Owoc(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki, boolean naSok, boolean naDzem)
     {
-        super(nazwa, gotoweDoZebrania, cena, czasProdukcji, adresIkonki);
+        super(nazwa, gotoweDoZebrania, cena, cenaWytworzenia, czasProdukcji, adresIkonki);
         this.naSok = naSok;
         this.naDzem = naDzem;
     }
