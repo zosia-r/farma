@@ -4,20 +4,21 @@ import Kawalek_Ziemi.Kawalek_Ziemi;
 
 public class Farma
 {
+    private static Farma instance;
     private String nazwaFarmy;  // wyświetlana nazwa farmy gracza
     private int wymiar;   // wymiar farmy, długość boku
     private Kawalek_Ziemi[][] kawalki_ziemi; // tablica dwuwymiarowa o bokach długości wymiar x wymiar
-    public Farma()
+    private Farma()
     {
         nazwaFarmy="FARMA";
-        wymiar=5;
+        wymiar = 5;
         kawalki_ziemi = new Kawalek_Ziemi[wymiar][wymiar];
     }
-    public Farma(String nazwaFarmy, int wymiar)
+    public static Farma getInstance()
     {
-        this.nazwaFarmy=nazwaFarmy;
-        this.wymiar=wymiar;
-        kawalki_ziemi=new Kawalek_Ziemi[wymiar][wymiar];
+        if (instance == null)
+            instance = new Farma();
+        return instance;
     }
     public String getNazwaFarmy()
     {
