@@ -11,7 +11,7 @@ public class Gra
     {
         this.liczbaMonet = 200;
         this.pozostalyCzas = 300;
-        this.farmaGracza = Farma.getInstance();
+        this.farmaGracza = new Farma();
     }
     public static Gra getInstance()
     {
@@ -39,9 +39,9 @@ public class Gra
     {
         this.pozostalyCzas=pozostalyCzas;
     }
-    public void setFarmaGracza(Farma farmaGracza)
+    public void setFarmaGracza(Farma farma)
     {
-        this.farmaGracza=farmaGracza;
+        this.farmaGracza = farma;
     }
     public void getStan()
     {
