@@ -1,8 +1,9 @@
-package przetwornia;
+package Przetwornia;
 import Produkt.Produkt;
 import java.util.Timer;
 import java.util.TimerTask;
 import Stodola.Stodola;
+import Gra.Gra;
 
 public class Przetwor extends Produkt {
     private Produkt ProduktPotrzebnyDoWyprodukowania;
@@ -18,15 +19,15 @@ public class Przetwor extends Produkt {
             uruchomLicznikOdliczania();
             for (int i = 0; i <= iloscPotrzebnegoProduktu; i++) {
                 Stodola.usunProdukt(ProduktPotrzebnyDoWyprodukowania);
-                }
             }
         }
+    }
     public void przerwijProdukcjePrzet() {
         setGotoweDoZebrania(false);
         wzrostTimer.cancel();
         odliczanieTimer.cancel();
         for (int i = 0; i <= iloscPotrzebnegoProduktu; i++) {
-            Stodola.dodajProdukt(ProduktPotrzebnyDoWyprodukowania);
+            Gra.getInstance().getFarmaGracza().getStodola().dodajProdukt(ProduktPotrzebnyDoWyprodukowania);
         }
 
     }
@@ -57,6 +58,3 @@ public class Przetwor extends Produkt {
         }, 1000, 1000);
     }
 }
-
-
-
