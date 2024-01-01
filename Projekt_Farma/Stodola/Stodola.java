@@ -9,10 +9,9 @@ import java.util.Iterator;
 
 public class Stodola {
 
-    private static Stodola instance;
     static private Map<Produkt, Integer> produkty = new HashMap<>();
 
-    private Stodola()
+    public Stodola()
     {
         //rośliny paszowe
         produkty.put(new Produkt("pszenica",true,20,5,10,"ad"),0);
@@ -36,13 +35,6 @@ public class Stodola {
         produkty.put(new Produkt("szynka", true, 55, 13, 12, "ad"), 0);
         produkty.put(new Produkt("kiełbasa", true, 56, 14, 12, "ad"), 0);
 
-    }
-
-    public static Stodola getInstance()
-    {
-        if (instance == null)
-            instance = new Stodola();
-        return instance;
     }
 
     public Map<Produkt, Integer> getProdukty()
