@@ -1,7 +1,7 @@
 package GUI;
 
+import Gra.Gra;
 import Produkt.Produkt;
-import Stodola.Stodola;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,7 @@ public class StodolaPodglad extends JButton
         this.addActionListener(new StodolaListener());
     }
 
-    class StodolaListener implements ActionListener
+    static class StodolaListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
@@ -33,7 +33,7 @@ public class StodolaPodglad extends JButton
 
         private void showLista()
         {
-            Map<Produkt, Integer> produkty = Stodola.getInstance().getProdukty();
+            Map<Produkt, Integer> produkty = Gra.getInstance().getFarmaGracza().getStodola().getProdukty();
 
             JDialog ramka = new JDialog();
             ramka.setTitle("Stodoła");
@@ -86,7 +86,7 @@ public class StodolaPodglad extends JButton
             JTextArea textArea = new JTextArea(3, 20);
             textArea.setEditable(false);
             textArea.setFont(new Font("Monospaced", Font.BOLD, 15));
-            int cenaProduktu = Stodola.getInstance().getCenaProduktu(wybranyProdukt);
+            int cenaProduktu = Gra.getInstance().getFarmaGracza().getStodola().getCenaProduktu(wybranyProdukt);
             textArea.setText("cena: " + cenaProduktu + ";");
 
             JLabel label = new JLabel(wybranyProdukt);
