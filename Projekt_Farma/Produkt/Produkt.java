@@ -2,6 +2,7 @@ package Produkt;
 
 import java.io.File;
 import Stodola.Stodola;
+import Gra.Gra;
 
 public class Produkt {
 
@@ -14,18 +15,18 @@ public class Produkt {
 
     public Produkt(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki)
     {
-        this.nazwa=nazwa;
-        this.gotoweDoZebrania=gotoweDoZebrania;
-        this.cena=cena;
+        this.nazwa = nazwa;
+        this.gotoweDoZebrania = gotoweDoZebrania;
+        this.cena = cena;
         this.cenaWytworzenia = cenaWytworzenia;
-        this.czasProdukcji=czasProdukcji;
+        this.czasProdukcji = czasProdukcji;
         ikonka = new File(adresIkonki);
     }
 
     public String getNazwa() { return nazwa; }
     public boolean getGotoweDoZebrania() { return gotoweDoZebrania; }
     public int getCena() { return cena; }
-    public int getCenaWytworzenia { return cenaWytworzenia; }
+    public int getCenaWytworzenia() {return cenaWytworzenia; }
     public int getCzasProdukcji() { return czasProdukcji; }
     public File getIkonka() { return ikonka; }
 
@@ -38,7 +39,7 @@ public class Produkt {
     public void zbierz()
     {
         if(gotoweDoZebrania) {
-            Stodola.getInstance().dodajProdukt(this);
+            Gra.getInstance().getFarmaGracza().getStodola().dodajProdukt(this);
             //usuwanie z tablicy upraw/zwierzat/przetworow
         }
         else
