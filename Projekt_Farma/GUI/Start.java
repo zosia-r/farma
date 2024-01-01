@@ -97,7 +97,7 @@ public class Start extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             String nazwa = poleTekstowe.getText();
-            Farma.getInstance().setNazwaFarmy(nazwa);
+            Gra.getInstance().getFarmaGracza().setNazwaFarmy(nazwa);
         }
 
     }
