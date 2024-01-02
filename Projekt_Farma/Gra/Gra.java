@@ -36,6 +36,13 @@ public class Gra implements Serializable
     {
         return pozostalyCzas;
     }
+    public String getPozostalyCzasS() //metoda potrzebna zeby ladnie wyswietlac sekundy (np. 2:01 zamiast 2:1)
+    {
+        if(pozostalyCzas%60<10)
+            return "0"+pozostalyCzas%60;
+        else
+            return String.valueOf(pozostalyCzas%60);
+    }
     public Farma getFarmaGracza()
     {
         return farmaGracza;
