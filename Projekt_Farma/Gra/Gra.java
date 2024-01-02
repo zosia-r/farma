@@ -1,12 +1,17 @@
 package Gra;
 import Farma.Farma;
 
-public class Gra
+import java.io.ObjectOutput;
+import java.io.*;
+
+public class Gra implements Serializable
 {
     private static Gra instance;
     private int liczbaMonet;   // 200 na początku gry
     private int pozostalyCzas; // w sekundach
     private Farma farmaGracza; // farma gracza
+
+
     private Gra()
     {
         this.liczbaMonet = 200;
@@ -59,6 +64,25 @@ public class Gra
             liczbaMonet -= iloscMonet;
         } else {
             System.out.println("Nieprawidłowa ilość monet do odjęcia.");
+        }
+    }
+
+    public void zapisWyniku()
+    {
+        ObjectOutputStream str = null;
+        try {
+            str = new ObjectOutputStream(new FileOutputStream("Tabela_wynikow.ser", true));
+            str.writeObject("Farma: " + farmaGracza.getNazwaFarmy() + ", Wynik: " + liczbaMonet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                str.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
