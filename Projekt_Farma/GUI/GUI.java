@@ -9,11 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +21,8 @@ public class GUI extends JFrame {
     private final int szerokoscEkranu = szerokoscFarmy;
     private final int wysokoscFarmy = 400;
     private final int wysokoscPaskaInformacyjnego = 100;
-    private final int wysokoscEkranu = wysokoscFarmy + wysokoscPaskaInformacyjnego;
+    private final int wysokoscTimera = 40;
+    private final int wysokoscEkranu = wysokoscFarmy + wysokoscPaskaInformacyjnego + wysokoscTimera;
 
     Gra gra;
 
@@ -34,7 +33,7 @@ public class GUI extends JFrame {
     }
 
     private void init() {
-        setTitle("Interfejs Graficzny Farmy");
+        setTitle("FARMA");
         setSize(szerokoscEkranu, wysokoscEkranu);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -46,6 +45,8 @@ public class GUI extends JFrame {
 
 
     private void createAndShowGUI() {
+        GUI_Timer();
+
         GUI_Farma();
 
         GUI_PasekInformacyjny();
@@ -53,10 +54,38 @@ public class GUI extends JFrame {
         this.setVisible(true);
     }
 
+    private void GUI_Timer()
+    {
+        JPanel panel_timer = new JPanel();
+        panel_timer.setPreferredSize(new Dimension(szerokoscEkranu,wysokoscTimera));
+        panel_timer.setBackground(Color.decode("#f0bd8d"));
+
+        JLabel czas = new JLabel(gra.getPozostalyCzas()/60 + ":" + gra.getPozostalyCzasS()); //czas poczatkowy
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                czas.setText(gra.getPozostalyCzas() / 60 + ":" + gra.getPozostalyCzasS()); //timer co sekunde zmienia wyswietlany czas
+                if(gra.getPozostalyCzas()==0) { //jak czas sie skonczy to timer sie zatrzymuje i wyswietla "Koniec gry!"
+                    ((Timer) e.getSource()).stop();
+                    czas.setText("Koniec gry!");
+                }
+            }
+        });
+        timer.start();
+
+        czas.setFont(new Font("Monospaced", Font.BOLD, 20));
+        czas.setForeground(Color.BLACK);
+        czas.setHorizontalAlignment(JLabel.CENTER);
+        czas.setVerticalAlignment(JLabel.CENTER);
+        panel_timer.add(czas,BorderLayout.CENTER);
+
+        this.add(panel_timer,BorderLayout.SOUTH);
+    }
+
     private void GUI_Farma() {
         JPanel panel = new JPanel(new GridLayout(wymiarFarmy, wymiarFarmy));
-
         panel.setPreferredSize(new Dimension(szerokoscFarmy,wysokoscFarmy));
+        panel.setBackground(Color.decode("#f0bd8d"));
 
         // Tworzenie farmy
 
@@ -77,6 +106,7 @@ public class GUI extends JFrame {
         // Tworzenie gornego pasaka z informacjami
         JPanel panel_informacje = new JPanel();
         panel_informacje.setPreferredSize(new Dimension(szerokoscEkranu,wysokoscPaskaInformacyjnego));
+        panel_informacje.setBackground(Color.decode("#f0bd8d"));
 
         // Tekst wyswietlany na pasku
         JLabel tekst = new JLabel("Nazwa Farmy: "+ gra.getFarmaGracza().getNazwaFarmy( )
@@ -94,7 +124,6 @@ public class GUI extends JFrame {
         StodolaPodglad buttonStodola = new StodolaPodglad();
         panel_informacje.add(buttonStodola);
 
-
         // Dodawanie panelu do ramki
         this.add(panel_informacje,BorderLayout.NORTH);
     }
@@ -106,7 +135,8 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Wyświetlanie informacji na temat kawałka ziemi po kliknięciu
-                System.out.println("Jest to pole: "+((button.getY()-1)/72+1)+", "+(button.getX()/77+1));
+                if(gra.getPozostalyCzas()!=0)
+                   System.out.println("Jest to pole: "+((button.getY()-1)/72+1)+", "+(button.getX()/77+1));
             }
         });
 
