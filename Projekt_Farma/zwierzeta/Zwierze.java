@@ -2,14 +2,14 @@ package zwierzeta;
 
 import Produkt.Produkt;
 
-public abstract class Zwierze{
+public abstract class Zwierze {
 
 
     private String nazwa;
     private int cena;
     private boolean glodne;
     private File ikonka;
-    private Produkt produktZ;
+    private ProduktZw produktZ;
 
     public Zwierze()
     {
@@ -59,7 +59,7 @@ public abstract class Zwierze{
         return produktZ;
     }
 
-    public void setProduktZ(Produkt produktZ)
+    public void setProduktZ(ProduktZw produktZ)
     {
         this.produktZ = produktZ;
     }

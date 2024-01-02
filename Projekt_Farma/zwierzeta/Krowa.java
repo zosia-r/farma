@@ -13,7 +13,7 @@ public class Krowa extends Zwierze {
     {
         if (getGlodne() == false)
         {
-            setProduktZ(new Produkt("mleko", true, 15, 3, 10, "ad"));
+            setProduktZ(new ProduktZw("mleko", true, 15, 3, 10, "ad"));
             setGlodne(true);
         }
 

@@ -11,7 +11,7 @@ public class Kura extends Zwierze {
 
     public void znies() {
         if (getGlodne() == false) {
-            setProduktZ(new Produkt("jajka", true, 16, 4, 10, "ad"));
+            setProduktZ(new ProduktZw("jajka", false, 16, 4, 10, "ad"));
             setGlodne(true);
         }
 
