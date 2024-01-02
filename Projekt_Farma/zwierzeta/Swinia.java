@@ -14,7 +14,7 @@ public class Swinia extends Zwierze {
     {
         if(getGlodne()==false)
         {
-            setProduktZ(new ProduktZw("mięso", true, 25, 6, 10,"ad"));
+            setProduktZ(new ProduktZw("mięso", false, 25, 6, 10,"ad"));
             setGlodne(true);
 
 
