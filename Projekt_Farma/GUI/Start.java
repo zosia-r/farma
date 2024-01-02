@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class Start extends JFrame
 {
     private int szerokosc = 600;
-    private int wysokosc = 300;
+    private int wysokosc = 336;
 
     private JLabel tytul;
     private JTextField poleTekstowe;
