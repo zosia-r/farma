@@ -1,5 +1,7 @@
 package Gra;
 import Farma.Farma;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import java.io.ObjectOutput;
 import java.io.*;
@@ -7,6 +9,7 @@ import java.io.*;
 public class Gra implements Serializable
 {
     private static Gra instance;
+    private static final int CZAS_STARTOWY = 300; // czas w sekundach (5 minut)
     private int liczbaMonet;   // 200 na początku gry
     private int pozostalyCzas; // w sekundach
     private Farma farmaGracza; // farma gracza
@@ -15,8 +18,9 @@ public class Gra implements Serializable
     private Gra()
     {
         this.liczbaMonet = 200;
-        this.pozostalyCzas = 300;
+        this.pozostalyCzas = CZAS_STARTOWY;
         this.farmaGracza = new Farma();
+        startTimer();
     }
     public static Gra getInstance()
     {
@@ -51,7 +55,7 @@ public class Gra implements Serializable
     public void getStan()
     {
         System.out.println("Obecna liczba monet: "+getLiczbaMonet());
-        System.out.println("Pozostały czas gry: "+getPozostalyCzas()+" sekund");
+        System.out.println("Pozostały czas gry: "+aktualizujCzas());
 
     }
     public void rozpocznijGre()
@@ -65,6 +69,32 @@ public class Gra implements Serializable
         } else {
             System.out.println("Nieprawidłowa ilość monet do odjęcia.");
         }
+    }
+    private void startTimer() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (pozostalyCzas > 0) {
+                    pozostalyCzas--;
+                    aktualizujCzas();
+                } else {
+                    koniecGry();
+                    timer.cancel();
+                }
+            }
+        }, 1000, 1000);
+    }
+
+    private String aktualizujCzas() {
+        int minuty = pozostalyCzas / 60;
+        int sekundy = pozostalyCzas % 60;
+        return minuty + " minut " + sekundy + " sekund";
+    }
+
+    private void koniecGry() {
+        System.out.println("Koniec gry!");
+        // Tutaj zapis wyniku do pliku z rankingiem?
     }
 
     public void zapisWyniku()

@@ -1,6 +1,7 @@
 package Kawalek_Ziemi;
 import Pole.Uprawa;
 import Obserwator.Obserwator;
+import Wyjatek.*;
 
 public class Pole_Uprawne extends Kawalek_Ziemi
 {
