@@ -16,7 +16,7 @@ public class Produkt {
     private File ikonka;
     private Timer odliczanieTimer;
     private Timer wzrostTimer;
-    private long pozostalyCzas = czasProdukcji;
+    private long pozostalyCzas ;
 
     public Produkt(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki)
     {
@@ -25,6 +25,7 @@ public class Produkt {
         this.cena = cena;
         this.cenaWytworzenia = cenaWytworzenia;
         this.czasProdukcji = czasProdukcji;
+
         ikonka = new File(adresIkonki);
     }
 
@@ -49,6 +50,7 @@ public class Produkt {
     public void setCena(int cena) { this.cena=cena; }
     public void setCzasProdukcji(int czasProdukcji) { this.czasProdukcji=czasProdukcji; }
     public void setIkonka(String adresIkonki) { ikonka=new File(adresIkonki); }
+    public void setPozostalyCzas(long pozostalyCzas) { this.pozostalyCzas=pozostalyCzas; }
 
     public void zbierz()
     {
