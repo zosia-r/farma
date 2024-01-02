@@ -4,6 +4,7 @@ import Gra.Gra;
 import Farma.Farma;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +41,7 @@ public class Start extends JFrame
         public void paintComponent(Graphics g)
         {
             super.paintComponent(g);
-            Image obrazek = new ImageIcon("C:\\Users\\Zosia\\OneDrive\\Pulpit\\ist\\FARMA\\ikonki\\trawa2.png").getImage();
+            Image obrazek = new ImageIcon("farma.gif").getImage();
             g.drawImage(obrazek, 0, 0, this);
 
         }
@@ -58,6 +59,7 @@ public class Start extends JFrame
 
         tytul = new JLabel("FARMA", SwingConstants.CENTER);
         tytul.setFont(new Font("Monospaced", Font.BOLD, 100));
+        tytul.setForeground(Color.decode("#26180b"));
         panel.add(tytul, BorderLayout.NORTH);
 
         JPanel centerPanel = new JPanel(new GridBagLayout());
@@ -68,8 +70,14 @@ public class Start extends JFrame
         JLabel etykieta = new JLabel("Wpisz nazwę swojej farmy");
         etykieta.setFont(new Font("Monospaced", Font.BOLD, 10));
         poleTekstowe = new JTextField(15);
+        poleTekstowe.setFont(new Font("Monospaced", Font.BOLD, 15));
+        poleTekstowe.setBackground(Color.decode("#f0bd8d"));
+        poleTekstowe.setBorder(new LineBorder(Color.decode("#26180b"),1));
         JButton button = new JButton("START!");
-        button.setFont(new Font("Monospaced", Font.BOLD, 15));
+        button.setFont(new Font("Monospaced", Font.BOLD, 20));
+        button.setForeground(Color.decode("#f0bd8d"));
+        button.setBackground(Color.decode("#26180b"));
+        button.setBorder(new LineBorder(Color.decode("#f0bd8d"),3,true));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
