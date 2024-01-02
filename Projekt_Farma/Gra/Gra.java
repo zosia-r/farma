@@ -95,10 +95,7 @@ public class Gra implements Serializable
     private void koniecGry() {
         System.out.println("Koniec gry!");
         // Tutaj zapis wyniku do pliku z rankingiem?
-    }
 
-    public void zapisWyniku()
-    {
         ObjectOutputStream str = null;
         try {
             str = new ObjectOutputStream(new FileOutputStream("Tabela_wynikow.ser", true));
