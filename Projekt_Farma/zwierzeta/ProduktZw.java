@@ -10,4 +10,11 @@ public class ProduktZw extends Produkt {
         super(nazwa, gotoweDoZebrania, cena, cenaWytworzenia, czasProdukcji, adresIkonki);
         uruchomLiczniki();
     }
+
+    public void usunietoZwierze()
+    {
+        setGotoweDoZebrania(false);
+        getWzrostTimer().cancel();
+        getOdliczanieTimer().cancel();
+    }
 }

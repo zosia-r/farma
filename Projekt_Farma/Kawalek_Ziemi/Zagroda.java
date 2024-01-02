@@ -15,6 +15,16 @@ public class Zagroda extends Kawalek_Ziemi {
         zwierze = null;
     }
 
+    public Zwierze getZwierze()
+    {
+        return zwierze;
+    }
+
+    public void setZwierze(Zwierze zwierze)
+    {
+        this.zwierze = zwierze;
+    }
+
     public void KupZwierze(Zwierze zwierze) throws FieldNotEmptyException
     {
         if (this.zwierze != null)
@@ -38,17 +48,36 @@ public class Zagroda extends Kawalek_Ziemi {
 
     public void usunZwierze()
     {
-        zwierze = null;
+        if(zwierze!=null)
+        {
+            if(zwierze.getProduktZ()!=null) {
+                ((ProduktZw) zwierze.getProduktZ()).usunietoZwierze();
+            }
+            zwierze = null;
+        }
+        else {
+            System.out.println("Na tym polu nie ma zwierzęcia");
+        }
     }
 
     public void nakarm()
     {
-        zwierze.setGlodne(false);
+        if(zwierze!=null && zwierze.getGlodne()==true) {
+
+            zwierze.setGlodne(false);
+    }
     }
 
     public void zbierzProdukt()
     {
-        zwierze.getProduktZ().zbierz();
+        if(zwierze != null) {
+            if(zwierze.getProduktZ() != null && zwierze.getProduktZ().getGotoweDoZebrania()) {
+                zwierze.getProduktZ().zbierz();
+                zwierze.setProduktZ(null);
+            } else {
+                System.out.println("Tego produktu nie można jeszcze zebrać");
+            }
+        }
     }
 
     //podmiot
