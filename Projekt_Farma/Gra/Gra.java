@@ -15,7 +15,8 @@ public class Gra implements Serializable
     private int pozostalyCzas; // w sekundach
     private Farma farmaGracza; // farma gracza
 
-    private ArrayList<String> Wyniki;
+    private static ArrayList<String> Wyniki; //zeby stad pobrac dane do wyswietlanego rankingu
+    private static int MonetyNaKoniec; //zeby uzyc w statycznej metodzie serializacji
 
 
     private Gra()
@@ -68,6 +69,11 @@ public class Gra implements Serializable
     {
         this.farmaGracza = farma;
     }
+
+    public void setMonetyNaKoniec(int MonetyNaKoniec)
+    {
+        this.MonetyNaKoniec = MonetyNaKoniec;
+    }
     public void getStan()
     {
         System.out.println("Obecna liczba monet: "+getLiczbaMonet());
@@ -111,6 +117,7 @@ public class Gra implements Serializable
     private void koniecGry() {
         System.out.println("Koniec gry!");
         // Tutaj zapis wyniku do pliku z rankingiem?
+        setMonetyNaKoniec(liczbaMonet);
         Serializacja();
         Deserializacja();
 
@@ -118,10 +125,10 @@ public class Gra implements Serializable
     }
 //nie jestem pewna czy te dwie metody i lista wyniki nie powinny byc statyczne..
 //ale wtedy jest problem z liczbaMonet ktore nie jest statyczne
-    private void Serializacja()
+    private static void Serializacja()
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
-            writer.write("Farma: " + ", Wynik: " + liczbaMonet);
+            writer.write("Farma: " + ", Wynik: " + MonetyNaKoniec);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
