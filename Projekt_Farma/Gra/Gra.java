@@ -2,6 +2,7 @@ package Gra;
 import Farma.Farma;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.ArrayList;
 
 import java.io.ObjectOutput;
 import java.io.*;
@@ -14,6 +15,8 @@ public class Gra implements Serializable
     private int pozostalyCzas; // w sekundach
     private Farma farmaGracza; // farma gracza
 
+    private ArrayList<String> Wyniki;
+
 
     private Gra()
     {
@@ -21,6 +24,7 @@ public class Gra implements Serializable
         this.pozostalyCzas = CZAS_STARTOWY;
         this.farmaGracza = new Farma();
         startTimer();
+        this.Wyniki = new ArrayList<>();
     }
     public static Gra getInstance()
     {
@@ -42,6 +46,11 @@ public class Gra implements Serializable
             return "0"+pozostalyCzas%60;
         else
             return String.valueOf(pozostalyCzas%60);
+    }
+
+    public ArrayList<String> getWyniki()
+    {
+        return Wyniki;
     }
     public Farma getFarmaGracza()
     {
@@ -102,21 +111,32 @@ public class Gra implements Serializable
     private void koniecGry() {
         System.out.println("Koniec gry!");
         // Tutaj zapis wyniku do pliku z rankingiem?
+        Serializacja();
+        Deserializacja();
 
-        ObjectOutputStream str = null;
-        try {
-            str = new ObjectOutputStream(new FileOutputStream("Tabela_wynikow.ser", true));
-            str.writeObject("Farma: " + farmaGracza.getNazwaFarmy() + ", Wynik: " + liczbaMonet);
+
+    }
+
+    private void Serializacja()
+    {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
+            writer.write("Farma: " + ", Wynik: " + liczbaMonet);
+            writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally
-        {
-            try
-            {
-                str.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        }
+    }
+
+    public void Deserializacja()
+    {
+        Wyniki.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader("Tabela_wynikow.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Wyniki.add(line);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
