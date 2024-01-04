@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
 
+import java.io.ObjectOutput;
 import java.io.*;
 
 public class Gra implements Serializable
@@ -14,8 +15,7 @@ public class Gra implements Serializable
     private int pozostalyCzas; // w sekundach
     private Farma farmaGracza; // farma gracza
 
-    private static ArrayList<String> Wyniki; //zeby stad wyswietlic ranking
-    private static int MonetyNaKoniec; //zeby moc je wprowadzic do statycznej metody serializacji
+    private ArrayList<String> Wyniki;
 
 
     private Gra()
@@ -25,7 +25,6 @@ public class Gra implements Serializable
         this.farmaGracza = new Farma();
         startTimer();
         this.Wyniki = new ArrayList<>();
-        this.MonetyNaKoniec = 0;
     }
     public static Gra getInstance()
     {
@@ -69,8 +68,6 @@ public class Gra implements Serializable
     {
         this.farmaGracza = farma;
     }
-
-    public void setMonetyNaKoniec(int MonetyNaKoniec) {this.MonetyNaKoniec=MonetyNaKoniec;};
     public void getStan()
     {
         System.out.println("Obecna liczba monet: "+getLiczbaMonet());
@@ -114,24 +111,24 @@ public class Gra implements Serializable
     private void koniecGry() {
         System.out.println("Koniec gry!");
         // Tutaj zapis wyniku do pliku z rankingiem?
-        setMonetyNaKoniec(liczbaMonet);
         Serializacja();
         Deserializacja();
 
 
     }
-
-    private static void Serializacja()
+//nie jestem pewna czy te dwie metody i lista wyniki nie powinny byc statyczne..
+//ale wtedy jest problem z liczbaMonet ktore nie jest statyczne
+    private void Serializacja()
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
-            writer.write("Farma: " + ", Wynik: " + MonetyNaKoniec);
+            writer.write("Farma: " + ", Wynik: " + liczbaMonet);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void Deserializacja()
+    public void Deserializacja()
     {
         Wyniki.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader("Tabela_wynikow.txt"))) {
