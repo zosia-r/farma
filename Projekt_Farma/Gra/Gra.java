@@ -123,8 +123,7 @@ public class Gra implements Serializable
 
 
     }
-//nie jestem pewna czy te dwie metody i lista wyniki nie powinny byc statyczne..
-//ale wtedy jest problem z liczbaMonet ktore nie jest statyczne
+    
     private static void Serializacja()
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
