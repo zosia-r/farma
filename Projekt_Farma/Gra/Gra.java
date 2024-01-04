@@ -116,7 +116,7 @@ public class Gra implements Serializable
 
 
     }
-
+//nie jestem pewna czy te dwie metody nie powinny byc statyczne..
     private void Serializacja()
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
