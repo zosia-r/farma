@@ -158,19 +158,11 @@ public class GUI extends JFrame {
                     		// Mozna dodac opcje przerwania produkcji
                     	}
                     	else {
-                    		System.out.println("mozna zasadzic, nic nie jest produkowane");
-                    		// Tworzymy nowe okno
-                    		OkienkoZasadz newFrame = new OkienkoZasadz(kawalek_ziemi_x, kawalek_ziemi_y, gra);
-                    	}
-                		
-                    	if (pole instanceof Pole_Uprawne) {
-                			System.out.println("To pole uprawne");
-                		}
-                		else if (pole instanceof Zagroda) {
-                    		System.out.println("To zagroda");
-                    	}
-                    	else if (pole instanceof Przetwornia) {
-                    		System.out.println("To przetwornia");
+                    		if (pole instanceof Pole_Uprawne) {
+	                    		System.out.println("mozna zasadzic, nic nie jest produkowane");
+	                    		// Tworzymy nowe okno
+	                    		OkienkoZasadz newFrame = new OkienkoZasadz(kawalek_ziemi_x, kawalek_ziemi_y, gra);
+	                    	}
                     	}
                 	}
                 	
