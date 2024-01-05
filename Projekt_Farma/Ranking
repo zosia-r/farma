@@ -1,1 +1,43 @@
+package Ranking;
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
+public class Ranking extends JFrame {
+    private ArrayList<String> wyniki;
+
+    public Ranking() {
+        this.wyniki = new ArrayList<>();
+        wczytajWyniki();
+
+        setTitle("Ranking Wyników");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea();
+        for (String wynik : wyniki) {
+            textArea.append(wynik + "\n");
+        }
+        textArea.setEditable(false);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        add(scrollPane, BorderLayout.CENTER);
+
+        setVisible(true);
+    }
+
+    private void wczytajWyniki() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Tabela_wynikow.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                wyniki.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
