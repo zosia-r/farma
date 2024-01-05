@@ -41,7 +41,7 @@ public class Start extends JFrame
         public void paintComponent(Graphics g)
         {
             super.paintComponent(g);
-            Image obrazek = new ImageIcon("farma.gif").getImage();
+            Image obrazek = new ImageIcon("grafika/farma.gif").getImage();
             g.drawImage(obrazek, 0, 0, this);
 
         }
