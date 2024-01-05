@@ -13,7 +13,7 @@ public class Zagroda extends Kawalek_Ziemi {
     private Produkt zyto;
 
 
-    public Zagroda(int x, int y, Zwierze zwierze)
+    public Zagroda(int x, int y)
     {
         super(x, y);
         zwierze = null;
