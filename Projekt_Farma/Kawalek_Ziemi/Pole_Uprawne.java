@@ -1,5 +1,6 @@
 package Kawalek_Ziemi;
 import Pole.Uprawa;
+
 import Obserwator.Obserwator;
 import Wyjatek.*;
 
@@ -7,10 +8,11 @@ public class Pole_Uprawne extends Kawalek_Ziemi
 {
     private Uprawa uprawa;
 
-    public Pole_Uprawne(int x, int y, Uprawa uprawa)
+    public Pole_Uprawne(int x, int y)
     {
         super(x, y);
         uprawa=null;
+        
     }
 
     public void zasadz(Uprawa uprawa)
@@ -23,6 +25,7 @@ public class Pole_Uprawne extends Kawalek_Ziemi
         {
             System.err.println(e.getMessage() + this.uprawa.getNazwa());
         }
+        powiadomObserwatorow();
     }
     
     public void zasadzUprawe(Uprawa uprawa) throws FieldNotEmptyException
@@ -46,6 +49,7 @@ public class Pole_Uprawne extends Kawalek_Ziemi
             //zrobic tak zeby opcja zbierz byla zablkowana(nie mozna jej klinac)
             System.out.println("Tej uprawy nie mozna jeszcze zebrac");
         }
+        powiadomObserwatorow();
     }
 
     public void przrwijWzrostUprawy()
@@ -77,8 +81,12 @@ public class Pole_Uprawne extends Kawalek_Ziemi
     {
         for(int i=0;i<getObserwatorzy().size();i++)
         {
-            Obserwator obs = (Obserwator) getObserwatorzy().get(i);
-            obs.aktualizacja(uprawa.getNazwa(),uprawa.getGotoweDoZebrania(),uprawa.getCzasProdukcji(),uprawa.getIkonka());
+        	Obserwator obs = (Obserwator) getObserwatorzy().get(i);
+        	
+            if (uprawa == null) {
+            	obs.aktualizacja("",false,0,null);
+            }
+            else obs.aktualizacja(uprawa.getNazwa(),uprawa.getGotoweDoZebrania(),uprawa.getPozostalyCzas(),uprawa.getIkonka());
         }
     }
     
