@@ -1,18 +1,24 @@
 package Kawalek_Ziemi;
 
 import Obserwator.Obserwator;
+import Produkt.Produkt;
 import Wyjatek.*;
 import zwierzeta.*;
+import Stodola.*;
 
 public class Zagroda extends Kawalek_Ziemi {
 
     private Zwierze zwierze;
+    private Produkt pszenica;
+    private Produkt zyto;
 
 
     public Zagroda(int x, int y, Zwierze zwierze)
     {
         super(x, y);
         zwierze = null;
+        pszenica = new Produkt("pszenica",true,20,5,10,"ad");
+        zyto = new Produkt("żyto", true, 22, 5,10, "ad3");
     }
 
     public Zwierze getZwierze()
@@ -63,8 +69,17 @@ public class Zagroda extends Kawalek_Ziemi {
     public void nakarm()
     {
         if(zwierze!=null && zwierze.getGlodne()==true) {
-
-            zwierze.setGlodne(false);
+            if(Stodola.sprawdzDostepnosc("pszenica")!=0) {
+                Stodola.usunProdukt(pszenica);
+                zwierze.setGlodne(false);
+            } else {
+                if(Stodola.sprawdzDostepnosc("zyto")!=0) {
+                    Stodola.usunProdukt(zyto);
+                    zwierze.setGlodne(false);
+                } else {
+                    System.out.println("Nie masz paszy do nakarmienia zwierzecia");
+                }
+            }
     }
     }
 
@@ -80,6 +95,7 @@ public class Zagroda extends Kawalek_Ziemi {
         }
     }
 
+    //nie jestem pewna czy przekazywac obserwatorowi informacje o produkcie czy o zwierzeciu
     //podmiot
     public void powiadomObserwatorow()
     {
