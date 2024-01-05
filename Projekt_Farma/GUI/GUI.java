@@ -1,19 +1,14 @@
 package GUI;
 
-import Farma.Farma;
 import Gra.Gra;
-import Kawalek_Ziemi.Kawalek_Ziemi;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import Kawalek_Ziemi.*;
+import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GUI extends JFrame {
     private int wymiarFarmy;
@@ -97,6 +92,7 @@ public class GUI extends JFrame {
                 panel.add(button);
             }
         }
+        createButton(Gra.getInstance().getFarmaGracza().getKawalki_ziemi()[0][0]).setIcon(new ImageIcon("pustePoleUprawne.png"));
         // Dodawanie panelu do ramki
         this.add(panel,BorderLayout.CENTER);
 
@@ -130,16 +126,77 @@ public class GUI extends JFrame {
 
     private JButton createButton(Kawalek_Ziemi kawalekZiemi) {
         JButton button = new JButton();
+        Kawalek_Ziemi[] kawalekZiemiArray = new Kawalek_Ziemi[]{kawalekZiemi};  // Tworzenie tablicy jednoelementowej
         // Ustawianie akcji po kliknięciu przycisku
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Wyświetlanie informacji na temat kawałka ziemi po kliknięciu
                 if(gra.getPozostalyCzas()!=0)
-                   System.out.println("Jest to pole: "+((button.getY()-1)/72+1)+", "+(button.getX()/77+1));
+                    System.out.println("Jest to pole: "+((button.getX()/76)+1)+", "+(button.getY()/72+1));
             }
         });
 
+        // Tworzenie menu kontekstowego
+        JPopupMenu popupMenu = new JPopupMenu();
+
+        // Dodawanie opcji do menu kontekstowego
+        JMenuItem poleUprawneItem = new JMenuItem("Pole Uprawne");
+        poleUprawneItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // podmiana elementu z kawałkaa Pole Uprawne
+                kawalekZiemiArray[0] = new Pole_Uprawne(button.getX(), button.getY(),null);
+                ImageIcon icon = new ImageIcon("grafika/pustePoleUprawne.png");
+                Image image = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                button.setIcon(new ImageIcon(image));
+                System.out.println("Kawałek ziemi o współrzędnych (" + ((button.getX()/76)+1) + ", " + (button.getY()/72+1) + ") stał się Polem Uprawnym. ");
+            }
+        });
+        popupMenu.add(poleUprawneItem);
+
+        JMenuItem przetworniaItem = new JMenuItem("Przetwornia");
+        przetworniaItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //  podmiana elementu z kawałka na Przetwornię
+                kawalekZiemiArray[0] = new Przetwornia(button.getX(), button.getY(),null);
+                ImageIcon icon = new ImageIcon("grafika/przetwornia.png");
+                Image image = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                button.setIcon(new ImageIcon(image));
+                System.out.println("Kawałek ziemi o współrzędnych (" + ((button.getX()/76)+1) + ", " + (button.getY()/72+1) + ") stał się Przetwórnią. ");
+            }
+        });
+        popupMenu.add(przetworniaItem);
+
+        JMenuItem zagrodaItem = new JMenuItem("Zagroda");
+        zagrodaItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // podmiana elementu z kawałka na zagrode
+                kawalekZiemiArray[0] = new Zagroda(button.getX(), button.getY(), null);
+                ImageIcon icon = new ImageIcon("grafika/pustaZagroda.png");
+                Image image = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                button.setIcon(new ImageIcon(image));
+
+                System.out.println("Kawałek ziemi o współrzędnych (" + ((button.getX()/76)+1) + ", " + (button.getY()/72+1) + ") stał się Zagrodą. ");
+            }
+        });
+        popupMenu.add(zagrodaItem);
+        button.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                if (me.getButton() == MouseEvent.BUTTON3) {
+                    // czy już zagospodarowany :\
+                    if (kawalekZiemiArray[0] instanceof Przetwornia == false && kawalekZiemiArray[0] instanceof Zagroda == false && kawalekZiemiArray[0] instanceof Pole_Uprawne == false) {
+                        // Jeśli nie, pokazujemy menu wyboru
+                        popupMenu.show(me.getComponent(), me.getX(), me.getY());
+                    } else {
+                        // Jeśli tak, wyświetlamy komunikat, że pole jest już zagospodarowane
+                        JOptionPane.showMessageDialog(null, "To pole jest już zagospodarowane!");
+                    }
+                }
+            }
+        });
         return button;
     }
 }
