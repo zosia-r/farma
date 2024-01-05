@@ -13,7 +13,7 @@ public class Gra implements Serializable
     private static final int CZAS_STARTOWY = 300; // czas w sekundach (5 minut)
     private int liczbaMonet;   // 200 na początku gry
     private int pozostalyCzas; // w sekundach
-    private Farma farmaGracza; // farma gracza
+    private static Farma farmaGracza; // farma gracza
 
     private static ArrayList<String> Wyniki; //zeby stad pobrac dane do wyswietlanego rankingu
     private static int MonetyNaKoniec; //zeby uzyc w statycznej metodzie serializacji
@@ -120,14 +120,14 @@ public class Gra implements Serializable
         setMonetyNaKoniec(liczbaMonet);
         Serializacja();
         Deserializacja();
-
+        Ranking ranking = new Ranking();
 
     }
     
     private static void Serializacja()
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
-            writer.write("Farma: " + ", Wynik: " + MonetyNaKoniec);
+            writer.write(farmaGracza.getNazwaFarmy() + ", Wynik: " + MonetyNaKoniec);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
