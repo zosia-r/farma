@@ -150,7 +150,7 @@ public class GUI extends JFrame {
                 	if ((pole instanceof Pole_Uprawne) || (pole instanceof Zagroda) || (pole instanceof Przetwornia)) {
                 		ArrayList <Obserwator> obserwatorzy = Gra.getInstance().getFarmaGracza().getKawalki_ziemi()[kawalek_ziemi_x][kawalek_ziemi_y].getObserwatorzy();
                     	InformacjeProduktPole InformacjePole = (InformacjeProduktPole) obserwatorzy.get(0);
-                		System.out.println("To pole jest okreslone, czy gotowe: " + InformacjePole.isGotoweDoZebrania());
+                		System.out.println("To pole jest okreslone, czy gotowe: " + InformacjePole.isGotoweDoZebrania() + ", czy produkuje: " + InformacjePole.isCzyProdukuje());
                     	
                     	if (InformacjePole.isCzyProdukuje()) {
                     		System.out.println("Trwa produkcja, czy gotowe: " + InformacjePole.getPozostalyCzas()+ " produkuje: " + InformacjePole.getNazwa());
@@ -159,6 +159,10 @@ public class GUI extends JFrame {
                     			if (pole instanceof Pole_Uprawne) {
                     			    Pole_Uprawne poleUprawne = (Pole_Uprawne) Gra.getInstance().getFarmaGracza().getKawalki_ziemi()[kawalek_ziemi_x][kawalek_ziemi_y];
                     			    poleUprawne.zbierzUprawe();
+                    			}
+                    			else if (pole instanceof Zagroda) {
+                    				Zagroda zagroda = (Zagroda) Gra.getInstance().getFarmaGracza().getKawalki_ziemi()[kawalek_ziemi_x][kawalek_ziemi_y];
+                    				zagroda.zbierzProdukt();
                     			}
                     		}
                     		// Mozna dodac opcje przerwania produkcji
@@ -169,13 +173,29 @@ public class GUI extends JFrame {
 	                    		// Tworzymy nowe okno
 	                    		OkienkoZasadz newFrame = new OkienkoZasadz(kawalek_ziemi_x, kawalek_ziemi_y);
                     		}
+                    		if (pole instanceof Zagroda) {
+	                    		Zagroda zagroda = (Zagroda) Gra.getInstance().getFarmaGracza().getKawalki_ziemi()[kawalek_ziemi_x][kawalek_ziemi_y];
+	                    		
+	                    		if (zagroda.getZwierze() == null) {
+	                    			// Tworzymy nowe okno
+		                    		System.out.println("mozna kupic zwierzeta, zagroda jest pusta");
+	                    			OkienkoZwierzeta newFrame = new OkienkoZwierzeta(kawalek_ziemi_x, kawalek_ziemi_y);
+	                    		} else {
+		                    		System.out.println("zagroda jest zajeta");
+	                    			// Tworzymy nowe okno
+		                    		OkienkoNakarm newFrame = new OkienkoNakarm(kawalek_ziemi_x, kawalek_ziemi_y);
+	                    		}
+	                    		// Tworzymy nowe okno
+	                    		//OkienkoZasadz newFrame = new OkienkoZwierzeta(kawalek_ziemi_x, kawalek_ziemi_y);
+                    		}
                     	}
                 		
                     	if (pole instanceof Pole_Uprawne) {
                 			System.out.println("To pole uprawne");
                 		}
                 		else if (pole instanceof Zagroda) {
-                    		System.out.println("To zagroda");
+                    		System.out.println("To zagroda stan:");
+                    		pole.getStan();
                     	}
                     	else if (pole instanceof Przetwornia) {
                     		System.out.println("To przetwornia");
