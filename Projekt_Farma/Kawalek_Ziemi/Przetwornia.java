@@ -73,7 +73,11 @@ public class Przetwornia extends Kawalek_Ziemi{
         for(int i=0;i<getObserwatorzy().size();i++)
         {
             Obserwator obs = (Obserwator) getObserwatorzy().get(i);
-            obs.aktualizacja(przetwor.getNazwa(),przetwor.getGotoweDoZebrania(),przetwor.getCzasProdukcji(),przetwor.getIkonka());
+            
+            if (przetwor == null) {
+            	obs.aktualizacja("",false,0,null);
+            }
+            else obs.aktualizacja(przetwor.getNazwa(),przetwor.getGotoweDoZebrania(),przetwor.getCzasProdukcji(),przetwor.getIkonka());
         }
     }
 
