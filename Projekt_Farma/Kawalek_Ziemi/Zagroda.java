@@ -82,14 +82,18 @@ public class Zagroda extends Kawalek_Ziemi {
             }
         }
     }
-    //nie jestem pewna czy przekazywac obserwatorowi informacje o produkcie czy o zwierzeciu
+    
     //podmiot
     public void powiadomObserwatorow()
     {
         for(int i=0;i<getObserwatorzy().size();i++)
         {
             Obserwator obs = (Obserwator) getObserwatorzy().get(i);
-            obs.aktualizacja(zwierze.getProduktZ().getNazwa(),zwierze.getProduktZ().getGotoweDoZebrania(),zwierze.getProduktZ().getCzasProdukcji(),zwierze.getProduktZ().getIkonka());
+            
+            if (zwierze == null) {
+            	obs.aktualizacja("",false,0,null);
+            }
+            else obs.aktualizacja(zwierze.getProduktZ().getNazwa(),zwierze.getProduktZ().getGotoweDoZebrania(),zwierze.getProduktZ().getCzasProdukcji(),zwierze.getProduktZ().getIkonka());
         }
     }
 }
