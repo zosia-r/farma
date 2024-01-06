@@ -86,11 +86,18 @@ public class Gra implements Serializable
         //podział na typy zagospodarowania
     }
     public void odejmijMonety(int iloscMonet) {
-        if (iloscMonet > 0 && iloscMonet <= liczbaMonet) {
+        if (iloscMonet > 0) {
             liczbaMonet -= iloscMonet;
         } else {
             System.out.println("Nieprawidłowa ilość monet do odjęcia.");
         }
+    }
+    public void dodajMonety(int iloscMonet)
+    {
+        if (iloscMonet > 0)
+            liczbaMonet += iloscMonet;
+        else
+            System.out.println("Nieprawidłowa ilość monet.");
     }
     private void startTimer() {
         Timer timer = new Timer();
