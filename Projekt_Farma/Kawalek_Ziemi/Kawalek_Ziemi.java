@@ -36,7 +36,24 @@ public abstract class Kawalek_Ziemi implements Podmiot
                 powiadomObserwatorow();
 
                 InformacjeProduktPole obserwatorIkonkaPola = (InformacjeProduktPole) obserwatorzy.get(0);
-                if (obserwatorIkonkaPola.getNazwa().equals("")) {
+                if (obserwatorIkonkaPola.isCzyZagroda()) {
+                	if (obserwatorIkonkaPola.getZwierze() == null) {
+            			ikonka = ikonkaPodstawowa;
+            		}
+                	else if (obserwatorIkonkaPola.getZwierze() != null) {
+                		if (obserwatorIkonkaPola.isCzyProdukuje() == false) {
+                			ImageIcon icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkiGlodne());
+                			ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                		} else if (obserwatorIkonkaPola.isGotoweDoZebrania() == false) {
+                			ImageIcon icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkiJedzace());
+                			ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                		}  else {
+                			ImageIcon icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkigotowe());
+                			ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                		}
+            		}
+                }
+                else if (obserwatorIkonkaPola.getNazwa().equals("")) {
                 	ikonka = ikonkaPodstawowa;
                 }
                 else if (obserwatorIkonkaPola.isGotoweDoZebrania() == false) {
