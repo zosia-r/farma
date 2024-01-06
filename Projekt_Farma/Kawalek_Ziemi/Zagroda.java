@@ -1,17 +1,13 @@
 package Kawalek_Ziemi;
-
 import Obserwator.Obserwator;
 import Produkt.Produkt;
 import Wyjatek.*;
-import Zwierzeta.*;
+import zwierzeta.*;
 import Stodola.*;
-
 public class Zagroda extends Kawalek_Ziemi {
-
     private Zwierze zwierze;
     private Produkt pszenica;
     private Produkt zyto;
-
 
     public Zagroda(int x, int y)
     {
@@ -20,26 +16,21 @@ public class Zagroda extends Kawalek_Ziemi {
         pszenica = new Produkt("pszenica",true,20,5,10,"ad");
         zyto = new Produkt("żyto", true, 22, 5,10, "ad3");
     }
-
     public Zwierze getZwierze()
     {
         return zwierze;
     }
-
     public void setZwierze(Zwierze zwierze)
     {
         this.zwierze = zwierze;
     }
-
     public void KupZwierze(Zwierze zwierze) throws FieldNotEmptyException
     {
         if (this.zwierze != null)
             throw new FieldNotEmptyException();
         this.zwierze = zwierze;
         System.out.println("Kupiono zwierze do tej zagrody");
-
     }
-
     public void sprobujKupicZwierze(Zwierze zwierze)
     {
         try
@@ -51,7 +42,6 @@ public class Zagroda extends Kawalek_Ziemi {
             System.err.println(e.getMessage() + this.zwierze.getNazwa());
         }
     }
-
     public void usunZwierze()
     {
         if(zwierze!=null)
@@ -65,24 +55,22 @@ public class Zagroda extends Kawalek_Ziemi {
             System.out.println("Na tym polu nie ma zwierzęcia");
         }
     }
-
     public void nakarm()
     {
         if(zwierze!=null && zwierze.getGlodne()==true) {
-            if(Stodola.getDostepnosc("pszenica")!=0) {
-                Stodola.usunProdukt(pszenica, 1);
+            if(Stodola.sprawdzDostepnosc("pszenica")!=0) {
+                Stodola.usunProdukt(pszenica);
                 zwierze.setGlodne(false);
             } else {
-                if(Stodola.getDostepnosc("zyto")!=0) {
-                    Stodola.usunProdukt(zyto, 1);
+                if(Stodola.sprawdzDostepnosc("zyto")!=0) {
+                    Stodola.usunProdukt(zyto);
                     zwierze.setGlodne(false);
                 } else {
                     System.out.println("Nie masz paszy do nakarmienia zwierzecia");
                 }
             }
-        }
     }
-
+    }
     public void zbierzProdukt()
     {
         if(zwierze != null) {
@@ -94,7 +82,6 @@ public class Zagroda extends Kawalek_Ziemi {
             }
         }
     }
-
     //nie jestem pewna czy przekazywac obserwatorowi informacje o produkcie czy o zwierzeciu
     //podmiot
     public void powiadomObserwatorow()
