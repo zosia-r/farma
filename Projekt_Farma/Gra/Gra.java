@@ -158,9 +158,9 @@ public class Gra implements Serializable
 
     //zeby byly malejaco w rankingu
     private static int porownajWyniki(String linia1, String linia2) {
-        int monet1 = Integer.parseInt(linia1.split(":")[1].trim());
-        int monet2 = Integer.parseInt(linia2.split(":")[1].trim());
-        return Integer.compare(monet2, monet1);
+        int monety1 = Integer.parseInt(linia1.split(":")[1].trim());
+        int monety2 = Integer.parseInt(linia2.split(":")[1].trim());
+        return Integer.compare(monety2, monety1);
     }
 
 }
