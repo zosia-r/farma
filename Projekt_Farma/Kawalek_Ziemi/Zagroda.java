@@ -3,7 +3,7 @@ package Kawalek_Ziemi;
 import Obserwator.Obserwator;
 import Produkt.Produkt;
 import Wyjatek.*;
-import zwierzeta.*;
+import Zwierzeta.*;
 import Stodola.*;
 
 public class Zagroda extends Kawalek_Ziemi {
@@ -69,18 +69,18 @@ public class Zagroda extends Kawalek_Ziemi {
     public void nakarm()
     {
         if(zwierze!=null && zwierze.getGlodne()==true) {
-            if(Stodola.sprawdzDostepnosc("pszenica")!=0) {
-                Stodola.usunProdukt(pszenica);
+            if(Stodola.getDostepnosc("pszenica")!=0) {
+                Stodola.usunProdukt(pszenica, 1);
                 zwierze.setGlodne(false);
             } else {
-                if(Stodola.sprawdzDostepnosc("zyto")!=0) {
-                    Stodola.usunProdukt(zyto);
+                if(Stodola.getDostepnosc("zyto")!=0) {
+                    Stodola.usunProdukt(zyto, 1);
                     zwierze.setGlodne(false);
                 } else {
                     System.out.println("Nie masz paszy do nakarmienia zwierzecia");
                 }
             }
-    }
+        }
     }
 
     public void zbierzProdukt()
