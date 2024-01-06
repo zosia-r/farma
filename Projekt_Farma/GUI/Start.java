@@ -115,7 +115,7 @@ public class Start extends JFrame
        @Override
        public void actionPerformed(ActionEvent e)
         {
-            GUI gui = new GUI(Gra.getInstance());
+            GUI gui = new GUI();
             zamknijRamke();
         }
     }
