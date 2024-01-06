@@ -55,16 +55,31 @@ public class Stodola {
             }
         }
     }
-    public static void usunProdukt(Produkt p, int ile)
+    public static void usunProdukt(Produkt p)
     {
         Set<Map.Entry<Produkt,Integer>> entries = produkty.entrySet();
         Iterator<Map.Entry<Produkt,Integer>> iteratorProduktow = entries.iterator();
         while(iteratorProduktow.hasNext())
         {
             Map.Entry<Produkt,Integer> entry = iteratorProduktow.next();
-            if(p.getNazwa().equals(entry.getKey().getNazwa()))
+            if(p.getNazwa().equals(entry.getKey().getNazwa()) && entry.getValue() > 0)
             {
-                if (entry.getValue() - ile >= 0)
+                entry.setValue(entry.getValue() - 1);
+                break;
+            }
+        }
+    }
+
+    public void sprzedaj (String nazwa, int ile)
+    {
+        Set<Map.Entry<Produkt,Integer>> entries = produkty.entrySet();
+        Iterator<Map.Entry<Produkt,Integer>> iteratorProduktow = entries.iterator();
+        while(iteratorProduktow.hasNext())
+        {
+            Map.Entry<Produkt,Integer> entry = iteratorProduktow.next();
+            if(nazwa.equals(entry.getKey().getNazwa()))
+            {
+                if (entry.getValue() - ile > 0)
                     entry.setValue(entry.getValue() - ile);
                 else
                     entry.setValue(0);
@@ -83,7 +98,7 @@ public class Stodola {
         }
     }
 
-    public static int getDostepnosc(String nazwa)
+    public static int sprawdzDostepnosc(String nazwa)
     {
         Set<Map.Entry<Produkt, Integer>> entries = produkty.entrySet();
         Iterator<Map.Entry<Produkt, Integer>> iteratorProduktow = entries.iterator();
