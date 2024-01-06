@@ -127,6 +127,7 @@ public class Gra implements Serializable
         setMonetyNaKoniec(liczbaMonet);
         Serializacja();
         Deserializacja();
+        Wyniki.sort(Gra::porownajWyniki);
         Ranking ranking = new Ranking();
 
     }
@@ -152,6 +153,13 @@ public class Gra implements Serializable
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //zeby byly malejaco w rankingu
+    private static int porownajWyniki(String linia1, String linia2) {
+        int monet1 = Integer.parseInt(linia1.split(":")[1].trim());
+        int monet2 = Integer.parseInt(linia2.split(":")[1].trim());
+        return Integer.compare(monet2, monet1);
     }
 
 }
