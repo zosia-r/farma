@@ -2,6 +2,8 @@ package Obserwator;
 
 import java.io.File;
 
+import zwierzeta.Zwierze;
+
 public class InformacjeProduktPole implements Obserwator{
 	
 	private boolean czyProdukuje = false; // jezeli nic nie jest produkowane na polu to mozna wyswietlac pole bez ikony produktu
@@ -9,6 +11,8 @@ public class InformacjeProduktPole implements Obserwator{
 	private boolean GotoweDoZebrania; // czy zebranie produktu jest mozliwe
 	private long PozostalyCzas;
 	private File ikonka; // ikonka produktu
+	private Zwierze zwierze;
+	private boolean czyZagroda = false;
 	
 	public InformacjeProduktPole() {
 		this.nazwa = nazwa;
@@ -22,8 +26,7 @@ public class InformacjeProduktPole implements Obserwator{
 		}
 	}
 	
-	@Override
-	public void aktualizacja(String nazwa, boolean GotoweDoZebrania, long PozostalyCzas, File ikonka) {
+	public void aktualizacja(String nazwa, boolean GotoweDoZebrania, long PozostalyCzas, File ikonka, Zwierze zwierze, boolean czyZagroda) {
 		this.nazwa = nazwa;
 		this.GotoweDoZebrania = GotoweDoZebrania;
 		this.PozostalyCzas = PozostalyCzas;
@@ -33,6 +36,8 @@ public class InformacjeProduktPole implements Obserwator{
 		} else {
 		    czyProdukuje = false;
 		}
+		this.zwierze = zwierze;
+		this.czyZagroda = czyZagroda;
 	}
 
 	public boolean isCzyProdukuje() {
@@ -73,6 +78,22 @@ public class InformacjeProduktPole implements Obserwator{
 
 	public void setIkonka(File ikonka) {
 		this.ikonka = ikonka;
+	}
+
+	public Zwierze getZwierze() {
+		return zwierze;
+	}
+
+	public void setZwierze(Zwierze zwierze) {
+		this.zwierze = zwierze;
+	}
+
+	public boolean isCzyZagroda() {
+		return czyZagroda;
+	}
+
+	public void setCzyZagroda(boolean czyZagroda) {
+		this.czyZagroda = czyZagroda;
 	}
 	
 	
