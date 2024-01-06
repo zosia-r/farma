@@ -1,4 +1,4 @@
-package Przetwornia;
+package przetwornia;
 import Produkt.Produkt;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,11 +11,11 @@ public class Przetwor extends Produkt {
 
     public Przetwor(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki, Produkt ProduktPotrzebnyDoWyprodukowania, int iloscPotrzebnegoProduktu) {
         super(nazwa, gotoweDoZebrania, cena, cenaWytworzenia, czasProdukcji, adresIkonki);
-        int l = Stodola.getDostepnosc(ProduktPotrzebnyDoWyprodukowania.getNazwa());
+        int l = Stodola.sprawdzDostepnosc(ProduktPotrzebnyDoWyprodukowania.getNazwa());
         if (l >= iloscPotrzebnegoProduktu) {
             uruchomLiczniki();
             for (int i = 0; i <= iloscPotrzebnegoProduktu; i++) {
-                Stodola.usunProdukt(ProduktPotrzebnyDoWyprodukowania, 1);
+                Stodola.usunProdukt(ProduktPotrzebnyDoWyprodukowania);
             }
         }
     }
