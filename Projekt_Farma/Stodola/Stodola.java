@@ -14,26 +14,26 @@ public class Stodola {
     public Stodola()
     {
         //rośliny paszowe
-        produkty.put(new Produkt("pszenica",false,20,5,10,"ad"),0);
-        produkty.put(new Produkt("żyto", false, 22, 5,10, "ad3"), 0);
+        produkty.put(new Produkt("pszenica",false,20,5,10,"grafika/pszenica.png"),0);
+        produkty.put(new Produkt("żyto", false, 22, 5,10, "grafika/zyto.png"), 0);
         //owoce
-        produkty.put(new Produkt("jabłka",false,10,2, 15,"ad"),0);
-        produkty.put(new Produkt ("gruszki", false, 12,2,  15, "ad"), 0);
-        produkty.put(new Produkt("winogrona", false, 15,3,  15, "ad"), 0);
+        produkty.put(new Produkt("jabłka",false,10,2, 15,"grafika/jablko.png"),0);
+        produkty.put(new Produkt ("gruszki", false, 12,2,  15, "grafika/gruszka.png"), 0);
+        produkty.put(new Produkt("winogrona", false, 15,3,  15, "grafika/winogrono.png"), 0);
         //odzwierzęce
-        produkty.put(new Produkt("mleko", false, 15, 3, 10, "ad"), 0);
-        produkty.put(new Produkt("jajka", false, 16, 4, 10, "ad"), 0);
-        produkty.put(new Produkt("mięso", false, 25, 6, 10,"ad"), 0);
+        produkty.put(new Produkt("mleko", false, 15, 3, 10, "grafika/mleko.png"), 0);
+        produkty.put(new Produkt("jajka", false, 16, 4, 10, "grafika/jajko.png"), 0);
+        produkty.put(new Produkt("mięso", false, 25, 6, 10,"grafika/mieso.png"), 0);
         //przetwory
-        produkty.put(new Produkt("chleb pszenny", false, 44, 11, 10, "ad"), 0);
-        produkty.put(new Produkt("chleb żytni", false, 45, 11, 10, "ad"), 0);
-        produkty.put(new Produkt("dżem jabłkowy", false, 37, 9, 8, "ad"), 0);
-        produkty.put(new Produkt("dżem gruszkowy", false, 38, 9, 8, "ad"), 0);
-        produkty.put(new Produkt("sok jabłkowy", false, 35, 8, 9, "ad"), 0);
-        produkty.put(new Produkt("sok gruszkowy", false, 36, 9, 9, "ad"), 0);
-        produkty.put(new Produkt("masło", false, 40, 10, 10, "ad"), 0);
-        produkty.put(new Produkt("szynka", false, 55, 13, 12, "ad"), 0);
-        produkty.put(new Produkt("kiełbasa", false, 56, 14, 12, "ad"), 0);
+        produkty.put(new Produkt("chleb pszenny", false, 44, 11, 10, "grafika/chlebPszenny.png"), 0);
+        produkty.put(new Produkt("chleb żytni", false, 45, 11, 10, "grafika/chlebZytni.png"), 0);
+        produkty.put(new Produkt("dżem jabłkowy", false, 37, 9, 8, "grafika/dzemJablkowy.png"), 0);
+        produkty.put(new Produkt("dżem gruszkowy", false, 38, 9, 8, "grafika/dzemGruszkowy.png"), 0);
+        produkty.put(new Produkt("sok jabłkowy", false, 35, 8, 9, "grafika/sokJablkowy.png"), 0);
+        produkty.put(new Produkt("sok gruszkowy", false, 36, 9, 9, "grafika/sokGruszkowy.png"), 0);
+        produkty.put(new Produkt("masło", false, 40, 10, 10, "grafika/maslo.png"), 0);
+        produkty.put(new Produkt("szynka", false, 55, 13, 12, "grafika/szynka.png"), 0);
+        produkty.put(new Produkt("kiełbasa", false, 56, 14, 12, "grafika/kielbasa.png"), 0);
 
     }
 
@@ -55,16 +55,19 @@ public class Stodola {
             }
         }
     }
-    public static void usunProdukt(Produkt p)
+    public static void usunProdukt(Produkt p, int ile)
     {
         Set<Map.Entry<Produkt,Integer>> entries = produkty.entrySet();
         Iterator<Map.Entry<Produkt,Integer>> iteratorProduktow = entries.iterator();
         while(iteratorProduktow.hasNext())
         {
             Map.Entry<Produkt,Integer> entry = iteratorProduktow.next();
-            if(p.getNazwa().equals(entry.getKey().getNazwa()) && entry.getValue() > 0)
+            if(p.getNazwa().equals(entry.getKey().getNazwa()))
             {
-                entry.setValue(entry.getValue() - 1);
+                if (entry.getValue() - ile >= 0)
+                    entry.setValue(entry.getValue() - ile);
+                else
+                    entry.setValue(0);
                 break;
             }
         }
@@ -80,7 +83,7 @@ public class Stodola {
         }
     }
 
-    public static int sprawdzDostepnosc(String nazwa)
+    public static int getDostepnosc(String nazwa)
     {
         Set<Map.Entry<Produkt, Integer>> entries = produkty.entrySet();
         Iterator<Map.Entry<Produkt, Integer>> iteratorProduktow = entries.iterator();
@@ -102,7 +105,7 @@ public class Stodola {
         }
         return 0;
     }
-    
+
     public int getCenaWytworzeniaProduktu(String nazwa)
     {
         for (Produkt produkt : produkty.keySet())
@@ -112,7 +115,7 @@ public class Stodola {
         }
         return 0;
     }
-    
+
     public Produkt getProdukt(String nazwa)
     {
         for (Produkt produkt : produkty.keySet())
