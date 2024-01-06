@@ -13,8 +13,8 @@ public class Zagroda extends Kawalek_Ziemi {
     {
         super(x, y);
         zwierze = null;
-        pszenica = new Produkt("pszenica",true,20,5,10,"ad");
-        zyto = new Produkt("żyto", true, 22, 5,10, "ad3");
+        pszenica = new Produkt("pszenica",false,20,5,10,"grafika/pszenica.png");
+        zyto = new Produkt("żyto", false, 22, 5,10, "grafika/zyto.png");
     }
     public Zwierze getZwierze()
     {
@@ -41,6 +41,7 @@ public class Zagroda extends Kawalek_Ziemi {
         {
             System.err.println(e.getMessage() + this.zwierze.getNazwa());
         }
+        powiadomObserwatorow();
     }
     public void usunZwierze()
     {
@@ -54,23 +55,51 @@ public class Zagroda extends Kawalek_Ziemi {
         else {
             System.out.println("Na tym polu nie ma zwierzęcia");
         }
+        powiadomObserwatorow();
     }
-    public void nakarm()
+    
+    public void rozpocznijProdukcje() {
+    	if (zwierze!=null) {
+    		if (zwierze instanceof Kura) {
+    			((Kura) zwierze).znies();
+    		} else if (zwierze instanceof Krowa) {
+    			((Krowa) zwierze).dojenie();
+    		} else if (zwierze instanceof Swinia) {
+    			((Swinia) zwierze).dajMieso();
+    		}
+    	}
+        powiadomObserwatorow();
+    }
+    
+    public void nakarmPszenica()
     {
         if(zwierze!=null && zwierze.getGlodne()==true) {
             if(Stodola.sprawdzDostepnosc("pszenica")!=0) {
+                System.out.println("Nakarmiono");
                 Stodola.usunProdukt(pszenica);
                 zwierze.setGlodne(false);
+                rozpocznijProdukcje();
             } else {
-                if(Stodola.sprawdzDostepnosc("zyto")!=0) {
-                    Stodola.usunProdukt(zyto);
-                    zwierze.setGlodne(false);
-                } else {
-                    System.out.println("Nie masz paszy do nakarmienia zwierzecia");
-                }
+                System.out.println("Nie masz pszenicy do nakarmienia zwierzecia");
             }
+        }
+        powiadomObserwatorow();
     }
+    
+    public void nakarmZyto()
+    {
+        if(zwierze!=null && zwierze.getGlodne()==true) {
+            if(Stodola.sprawdzDostepnosc("żyto")!=0) {
+                Stodola.usunProdukt(zyto);
+                zwierze.setGlodne(false);
+                rozpocznijProdukcje();
+            } else {
+                System.out.println("Nie masz zyta do nakarmienia zwierzecia");
+            }
+        }
+        powiadomObserwatorow();
     }
+    
     public void zbierzProdukt()
     {
         if(zwierze != null) {
@@ -81,6 +110,7 @@ public class Zagroda extends Kawalek_Ziemi {
                 System.out.println("Tego produktu nie można jeszcze zebrać");
             }
         }
+        powiadomObserwatorow();
     }
     
     //podmiot
@@ -90,10 +120,10 @@ public class Zagroda extends Kawalek_Ziemi {
         {
             Obserwator obs = (Obserwator) getObserwatorzy().get(i);
             
-            if (zwierze == null) {
-            	obs.aktualizacja("",false,0,null);
+            if (zwierze == null || zwierze.getProduktZ() == null) {
+            	obs.aktualizacja("",false,0,null, zwierze, true);
             }
-            else obs.aktualizacja(zwierze.getProduktZ().getNazwa(),zwierze.getProduktZ().getGotoweDoZebrania(),zwierze.getProduktZ().getCzasProdukcji(),zwierze.getProduktZ().getIkonka());
+            else obs.aktualizacja(zwierze.getProduktZ().getNazwa(),zwierze.getProduktZ().getGotoweDoZebrania(),zwierze.getProduktZ().getCzasProdukcji(),zwierze.getProduktZ().getIkonka(), zwierze, true);
         }
     }
 }
