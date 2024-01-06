@@ -17,18 +17,15 @@ import java.awt.event.ActionListener;
 
 public class OkienkoZasadz extends JButton {
 
-    String[] owoce = {"jabłka", "gruszki", "winogrona"};
-    String[] zboza = {"pszenica", "żyto"};
-    Gra gra;
-    JFrame newFrame = new JFrame("Nowe Okno");
+    String[] uprawy = {"jabłka", "gruszki", "winogrona", "pszenica", "żyto"};
+    JFrame sadzenie = new JFrame("Sadzenie");
     private int x;
     private int y;
 
-    public OkienkoZasadz(int x, int y, Gra gra) {
+    public OkienkoZasadz(int x, int y) {
         super();
         this.x = x;
         this.y = y;
-        this.gra = gra;
         init();
     }
 
@@ -36,146 +33,111 @@ public class OkienkoZasadz extends JButton {
         // Tworzymy nowe okno
 
         // Ustawiamy domyślne działanie po naciśnięciu przycisku zamknięcia
-        newFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    	sadzenie.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ustawiamy kolor tła całego okna na brązowy
-        newFrame.getContentPane().setBackground(new Color(139, 69, 19)); // RGB dla brązowego koloru
+        // newFrame.getContentPane().setBackground(new Color(139, 69, 19)); // RGB dla brązowego koloru
 
         // Dodajemy etykietę z tekstem do nowego okna
         JLabel label = new JLabel("Wybierz produkt do zasadzenia:");
         label.setHorizontalAlignment(JLabel.CENTER);
-        newFrame.getContentPane().add(label, BorderLayout.NORTH);
+        sadzenie.getContentPane().add(label, BorderLayout.NORTH);
 
         // Ustawiamy nowy zarządca komponentów BorderLayout
-        JPanel mainPanel = new JPanel(new BorderLayout());
-
-        // Tworzymy panel dla przycisków owocowych
-        JPanel owocePanel = new JPanel(new GridLayout(0, 3));
-
-        // Tworzymy przyciski owocowe
-        for (int i = 0; i < owoce.length; i++) {
-            JButton productButton = new JButton(owoce[i]);
-            JPanel panel = new JPanel(new BorderLayout());
-
-            // Nazwa na górze
-            JLabel nameLabel = new JLabel("Nazwa Produktu", JLabel.CENTER);
-            panel.add(nameLabel, BorderLayout.NORTH);
-
-            // Obrazek w środku
-            ImageIcon imageIcon = new ImageIcon("sciezka/do/obrazka.jpg");
-            JLabel imageLabel = new JLabel(imageIcon, JLabel.CENTER);
-            panel.add(imageLabel, BorderLayout.CENTER);
-
-            // Tekst na dole
-            JLabel textLabel = new JLabel("Krótki Tekst", JLabel.CENTER);
-            panel.add(textLabel, BorderLayout.SOUTH);
-            
-            configureButtonOwoc(productButton);
-            owocePanel.add(productButton);
+        JPanel mainPanel = new JPanel(new GridLayout(3, 2));
+        
+        // Tworzymy przyciski upraw
+        for (int i = 0; i < uprawy.length; i++) {
+            JButton productButton = przyciskUprawy(uprawy[i]);
+            mainPanel.add(productButton);
         }
-
-        // Tworzymy panel dla przycisków zbożowych
-        JPanel zbozaPanel = new JPanel(new GridLayout(0, 2));
-
-        // Tworzymy przyciski zbożowe
-        for (int i = 0; i < zboza.length; i++) {
-            JButton productButton = new JButton(zboza[i]);
-            configureButtonZboze(productButton);
-            zbozaPanel.add(productButton);
-        }
-
-        // Dodajemy panele z przyciskami do panelu głównego
-        mainPanel.add(owocePanel, BorderLayout.NORTH);
-        mainPanel.add(zbozaPanel, BorderLayout.SOUTH);
-
-        // Ograniczamy szerokość paneli
-        owocePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, owocePanel.getPreferredSize().height));
-        zbozaPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, zbozaPanel.getPreferredSize().height));
 
         // Dodajemy panel główny do nowego okna
-        newFrame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+        sadzenie.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
         // Ustawiamy rozmiar okna
-        newFrame.setSize(500, 250);
+        sadzenie.setSize(400, 250);
 
         // Ustawiamy okno na środku ekranu
-        newFrame.setLocationRelativeTo(null);
+        sadzenie.setLocationRelativeTo(null);
 
         // Ustawiamy widoczność okna
-        newFrame.setVisible(true);
+        sadzenie.setVisible(true);
 
-        return newFrame;
-    }
-
-    private void configureButtonOwoc(JButton button) {
-        // Ustawiamy przycisk jako kwadratowy
-        Dimension buttonSize = new Dimension(150, 100); // Dostosuj rozmiar przycisku według potrzeb
-        button.setPreferredSize(buttonSize);
-        button.setMinimumSize(buttonSize);
-        button.setMaximumSize(buttonSize);
-        
-        Stodola stodola = new Stodola();
-        Produkt coZasadzic = stodola.getProdukt(button.getText());
-        
-        // Miejsce na wstawienie obrazka
-        // ImageIcon imageIcon = new ImageIcon("sciezka/do/obrazka.jpg");
-        // button.setIcon(imageIcon);
-
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Tutaj możesz dodać obsługę naciśnięcia przycisku dla każdego produktu
-                System.out.println("Naciśnięto przycisk: " + button.getText() + coZasadzic.getCenaWytworzenia());
-                //gra.getFarmaGracza().getKawalki_ziemi()[x][y].zasadz(new Owoc(coZasadzic.getNazwa(),coZasadzic.getGotoweDoZebrania(),coZasadzic.getCena(),coZasadzic.getCenaWytworzenia(),coZasadzic.getCzasProdukcji(),"",true,true));
-                Kawalek_Ziemi[][] kawalkiZiemi = gra.getFarmaGracza().getKawalki_ziemi();
-                Kawalek_Ziemi kawalekZiemi = kawalkiZiemi[x][y];
-
-                if (kawalekZiemi instanceof Pole_Uprawne) {
-                    Pole_Uprawne poleUprawne = (Pole_Uprawne) kawalekZiemi;
-                    // Wywołanie metody zasadz na obiekcie poleUprawne
-                    poleUprawne.zasadz(new Owoc(coZasadzic.getNazwa(), coZasadzic.getGotoweDoZebrania(), coZasadzic.getCena(), coZasadzic.getCenaWytworzenia(), coZasadzic.getCzasProdukcji(), "", true, true));
-                }
-                
-                newFrame.dispose();
-            }
-            
-        });
+        return sadzenie;
     }
     
-    private void configureButtonZboze(JButton button) {
-        // Ustawiamy przycisk jako kwadratowy
-        Dimension buttonSize = new Dimension(150, 100); // Dostosuj rozmiar przycisku według potrzeb
-        button.setPreferredSize(buttonSize);
-        button.setMinimumSize(buttonSize);
-        button.setMaximumSize(buttonSize);
-        
-        
-        Stodola stodola = new Stodola();
-        Produkt coZasadzic = stodola.getProdukt(button.getText());
-        
-        // Miejsce na wstawienie obrazka
-        // ImageIcon imageIcon = new ImageIcon("sciezka/do/obrazka.jpg");
-        // button.setIcon(imageIcon);
+    private JButton przyciskUprawy(String nazwa) {
+    	JButton productButton = new JButton(nazwa);
+        JPanel panel = new JPanel(new BorderLayout());
 
-        button.addActionListener(new ActionListener() {
+        // Nazwa na górze
+        JLabel nameLabel = new JLabel(nazwa, JLabel.CENTER);
+        panel.add(nameLabel, BorderLayout.NORTH);
+
+        // Obrazek w środku
+        ImageIcon ikonka = new ImageIcon(Gra.getInstance().getFarmaGracza().getStodola().getProdukt(nazwa).getAdresIkonki());
+        ikonka = new ImageIcon(ikonka.getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+        
+        JLabel imageLabel = new JLabel(ikonka, JLabel.CENTER);
+        panel.add(imageLabel, BorderLayout.CENTER);
+        
+        productButton.setIcon(ikonka);
+        
+
+        // Tekst na dole
+        JLabel textLabel = new JLabel("Koszt: " + Gra.getInstance().getFarmaGracza().getStodola().getProdukt(nazwa).getCenaWytworzenia(), JLabel.CENTER);
+        panel.add(textLabel, BorderLayout.SOUTH);
+        
+        Dimension buttonSize = new Dimension(150, 100); // Dostosuj rozmiar przycisku według potrzeb
+        productButton.setPreferredSize(buttonSize);
+        productButton.setMinimumSize(buttonSize);
+        productButton.setMaximumSize(buttonSize);
+        
+        productButton.setContentAreaFilled(false); // Ustawienie przezroczystości tła
+        productButton.setBorderPainted(false); // Usunięcie rysowania ramki
+        productButton.setFocusPainted(false); // Usunięcie podświetlenia przy fokusowaniu
+        
+        
+        Produkt coZasadzic = Gra.getInstance().getFarmaGracza().getStodola().getProdukt(nazwa);
+        
+        productButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Tutaj możesz dodać obsługę naciśnięcia przycisku dla każdego produktu
-                System.out.println("Naciśnięto przycisk: " + button.getText() + coZasadzic.getCenaWytworzenia());
+                System.out.println("Naciśnięto przycisk: " + nazwa + coZasadzic.getCenaWytworzenia());
                 //gra.getFarmaGracza().getKawalki_ziemi()[x][y].zasadz(new Owoc(coZasadzic.getNazwa(),coZasadzic.getGotoweDoZebrania(),coZasadzic.getCena(),coZasadzic.getCenaWytworzenia(),coZasadzic.getCzasProdukcji(),"",true,true));
-                Kawalek_Ziemi[][] kawalkiZiemi = gra.getFarmaGracza().getKawalki_ziemi();
-                Kawalek_Ziemi kawalekZiemi = kawalkiZiemi[x][y];
-
-                if (kawalekZiemi instanceof Pole_Uprawne) {
-                    Pole_Uprawne poleUprawne = (Pole_Uprawne) kawalekZiemi;
+                
+                // Sprawdzenie czy Gracza stać na zakup nasion
+                if (Gra.getInstance().getLiczbaMonet() < coZasadzic.getCenaWytworzenia()) {
+                	System.out.println("Gracza nie stać na zasadzenie wybranej uprawy");
+                	String message = "Nie masz wystarczającej liczby monet na zakup " + nazwa +" (cena: "+ coZasadzic.getCenaWytworzenia()+")";
+                    JOptionPane.showMessageDialog(null, message, "Brak środków", JOptionPane.WARNING_MESSAGE);
+                }
+                else {
+                	Kawalek_Ziemi[][] kawalkiZiemi = Gra.getInstance().getFarmaGracza().getKawalki_ziemi();
+                    Kawalek_Ziemi kawalekZiemi = kawalkiZiemi[x][y];
                     
-                    // Wywołanie metody zasadz na obiekcie poleUprawne
-                    poleUprawne.zasadz(new Zboze(coZasadzic.getNazwa(), coZasadzic.getGotoweDoZebrania(), coZasadzic.getCena(), coZasadzic.getCenaWytworzenia(), coZasadzic.getCzasProdukcji(), "", true));
+                    Gra.getInstance().setLiczbaMonet(Gra.getInstance().getLiczbaMonet()-coZasadzic.getCenaWytworzenia());
+                    
+                    if (kawalekZiemi instanceof Pole_Uprawne) {
+                        Pole_Uprawne poleUprawne = (Pole_Uprawne) kawalekZiemi;
+                        if (nazwa.equals("pszenica") || nazwa.equals("żyto")) {
+                        	poleUprawne.zasadz(new Zboze(coZasadzic.getNazwa(), coZasadzic.getGotoweDoZebrania(), coZasadzic.getCena(), coZasadzic.getCenaWytworzenia(), coZasadzic.getCzasProdukcji(), "", true));
+                        }
+                        else {
+                        	poleUprawne.zasadz(new Owoc(coZasadzic.getNazwa(), coZasadzic.getGotoweDoZebrania(), coZasadzic.getCena(), coZasadzic.getCenaWytworzenia(), coZasadzic.getCzasProdukcji(), "", true, true));
+                        }
+                    }
+                    
+                    sadzenie.dispose();
                 }
                 
-                newFrame.dispose();
             }
             
         });
+        
+        return productButton;
     }
+
 }
