@@ -7,18 +7,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-
-public class StodolaPodglad extends JButton
-{
-    public StodolaPodglad()
-    {
+public class StodolaPodglad extends JButton {
+    public StodolaPodglad() {
         super();
         init();
     }
-    public void init()
-    {
+
+    public void init() {
         this.setText("STODOŁA");
         this.setFont(new Font("Monospaced", Font.BOLD, 15));
         this.addActionListener(new StodolaListener());
@@ -28,88 +26,75 @@ public class StodolaPodglad extends JButton
     {
         public void actionPerformed(ActionEvent e)
         {
-            showLista();
-        }
-
-        private void showLista()
-        {
             Map<Produkt, Integer> produkty = Gra.getInstance().getFarmaGracza().getStodola().getProdukty();
 
             JDialog ramka = new JDialog();
             ramka.setTitle("Stodoła");
             ramka.setFont(new Font("Monospaced", Font.BOLD, 15));
-            ramka.setSize(200, 300);
+            ramka.setSize(400, 400);
             ramka.setResizable(false);
             ramka.setLocationRelativeTo(null);
             ramka.setAlwaysOnTop(true);
 
-            DefaultListModel<String> listModel = new DefaultListModel<>();
-            JList<String> list = new JList<>(listModel);
-            list.setFont(new Font("Monospaced", Font.BOLD, 15));
+            JPanel panel = new JPanel(new GridLayout(0, 3));
 
-            // dodaje elementy do listy na podstawie zawartości mapy
             for (Map.Entry<Produkt, Integer> entry : produkty.entrySet())
             {
-                if (entry.getValue() != 0 )
-                {
-                    String pair = entry.getKey().getNazwa() + " - " + entry.getValue();
-                    listModel.addElement(pair);
-                }
+                ImageIcon ikona = new ImageIcon(entry.getKey().getIkonka().getPath());
+                Image scaledImage = ikona.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+                JButton button = new JButton(scaledIcon);
+                button.setOpaque(false);
+                button.setContentAreaFilled(false);
+                button.setBorderPainted(false);
+
+                button.addActionListener(new ProduktListener(entry.getKey().getNazwa()));
+                panel.add(button);
             }
-            // klikanie w produkty
-            list.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent e) {
-                    JList<String> list = (JList<String>) e.getSource();
-                    if (e.getClickCount() == 2)
-                    {
-                        int index = list.locationToIndex(e.getPoint());
-                        String wybranyProdukt = listModel.getElementAt(index).split(" - ")[0];
-                        wyswietlSzczegoly(wybranyProdukt);
-                    }
-                }
-            });
 
-            JScrollPane scrollPane = new JScrollPane(list);
-            ramka.getContentPane().add(scrollPane, BorderLayout.CENTER);
-
+            ramka.getContentPane().add(panel, BorderLayout.CENTER);
             ramka.setVisible(true);
         }
 
-        private static void wyswietlSzczegoly(String wybranyProdukt) {
-            JDialog szczegoly = new JDialog();
-            szczegoly.setSize(150, 150);
-            szczegoly.setFont(new Font("Monospaced", Font.BOLD, 15));
-            szczegoly.setLayout(new BorderLayout());
-            szczegoly.setAlwaysOnTop(true);
-            szczegoly.setLocationRelativeTo(null);
+        private static class ProduktListener implements ActionListener {
+            private final String nazwaProduktu;
 
-            JTextArea textArea = new JTextArea(3, 20);
-            textArea.setEditable(false);
-            textArea.setFont(new Font("Monospaced", Font.BOLD, 15));
-            int cenaProduktu = Gra.getInstance().getFarmaGracza().getStodola().getCenaProduktu(wybranyProdukt);
-            textArea.setText("cena: " + cenaProduktu + ";");
+            public ProduktListener(String nazwaProduktu) {
+                this.nazwaProduktu = nazwaProduktu;
+            }
 
-            JLabel label = new JLabel(wybranyProdukt);
-            label.setFont(new Font("Monospaced", Font.BOLD, 15));
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                JDialog szczegoly = new JDialog();
+                szczegoly.setTitle(nazwaProduktu);
+                szczegoly.setFont(new Font("Monospaced", Font.BOLD, 15));
+                szczegoly.setSize(150, 150);
+                szczegoly.setResizable(false);
+                szczegoly.setLocationRelativeTo(null);
+                szczegoly.setAlwaysOnTop(true);
 
-            JButton sprzedaj = new JButton("Sprzedaj");
-            sprzedaj.setFont(new Font("Monospaced", Font.BOLD, 15));
-            sprzedaj.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // produkt.sprzedaj (wybierz ile, zwieksz monety, zmniejsz produkty itp)
-                    JOptionPane.showMessageDialog(szczegoly, "Dokonano sprzedaży!");
-                }
-            });
+                JPanel panel = new JPanel(new BorderLayout());
 
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            buttonPanel.add(sprzedaj);
+                JTextArea textArea = new JTextArea();
+                textArea.setFont(new Font("Monospaced", Font.BOLD, 15));
+                int cena = Gra.getInstance().getFarmaGracza().getStodola().getCenaProduktu(nazwaProduktu);
+                int ilosc = Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc(nazwaProduktu);
+                textArea.setText("Ilość: " + ilosc + "\n" + "Cena: " + cena);
+                textArea.setEditable(false);
 
-            szczegoly.add(textArea, BorderLayout.CENTER);
-            szczegoly.add(label, BorderLayout.NORTH);
-            szczegoly.add(buttonPanel, BorderLayout.SOUTH);
+                panel.add(textArea, BorderLayout.CENTER);
 
-            szczegoly.setVisible(true);
+
+                Sprzedaj sprzedaj = new Sprzedaj(nazwaProduktu);
+
+                panel.add(sprzedaj, BorderLayout.SOUTH);
+                szczegoly.add(panel);
+
+                szczegoly.setVisible(true);
+            }
+
         }
 
     }
