@@ -84,9 +84,9 @@ public class Pole_Uprawne extends Kawalek_Ziemi
         	Obserwator obs = (Obserwator) getObserwatorzy().get(i);
         	
             if (uprawa == null) {
-            	obs.aktualizacja("",false,0,null);
+            	obs.aktualizacja("",false,0,null, null, false);
             }
-            else obs.aktualizacja(uprawa.getNazwa(),uprawa.getGotoweDoZebrania(),uprawa.getPozostalyCzas(),uprawa.getIkonka());
+            else obs.aktualizacja(uprawa.getNazwa(),uprawa.getGotoweDoZebrania(),uprawa.getPozostalyCzas(),uprawa.getIkonka(), null, false);
         }
     }
     
