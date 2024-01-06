@@ -1,15 +1,20 @@
 package zwierzeta;
 
+import java.io.File;
+
 import Produkt.Produkt;
 
 public abstract class Zwierze {
 
 
     private String nazwa;
-    private int cena;
+    private int cena = 30;
     private boolean glodne;
     private File ikonka;
     private ProduktZw produktZ;
+    private String adresIkonkiGlodne;
+    private String adresIkonkiJedzace;
+    private String adresIkonkigotowe;
 
     public Zwierze()
     {
@@ -75,6 +80,48 @@ public abstract class Zwierze {
     }
 
 
+
+
+	public String getAdresIkonkiGlodne() {
+		return adresIkonkiGlodne;
+	}
+
+
+
+
+	public void setAdresIkonkiGlodne(String adresIkonkiGlodne) {
+		this.adresIkonkiGlodne = adresIkonkiGlodne;
+	}
+
+
+
+
+	public String getAdresIkonkiJedzace() {
+		return adresIkonkiJedzace;
+	}
+
+
+
+
+	public void setAdresIkonkiJedzace(String adresIkonkiJedzace) {
+		this.adresIkonkiJedzace = adresIkonkiJedzace;
+	}
+
+
+
+
+	public String getAdresIkonkigotowe() {
+		return adresIkonkigotowe;
+	}
+
+
+
+
+	public void setAdresIkonkigotowe(String adresIkonkigotowe) {
+		this.adresIkonkigotowe = adresIkonkigotowe;
+	}
+
+    
 
 
 }
