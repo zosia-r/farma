@@ -16,6 +16,7 @@ public class KatalogProduktow extends JButton{
     public void init() {
         this.setText("KATALOG PRODUKTÓW");
         this.setFont(new Font("Monospaced", Font.BOLD, 15));
+        this.setBackground(Color.decode("#eee3da"));
         this.addActionListener(new ListaProduktowListener());
     }
 
