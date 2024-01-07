@@ -128,6 +128,13 @@ public class Gra implements Serializable
         setMonetyNaKoniec(liczbaMonet);
         Serializacja();
         Deserializacja();
+        for(int i=0; i<Wyniki.size(); i++)
+        {
+            if (Wyniki.get(i).equals(""))
+            {
+                Wyniki.remove(i);
+            }
+        }
         Wyniki.sort(Gra::porownajWyniki);
         Ranking ranking = new Ranking();
 
