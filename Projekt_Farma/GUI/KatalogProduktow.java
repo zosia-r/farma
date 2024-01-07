@@ -35,22 +35,21 @@ public class KatalogProduktow extends JButton{
                 Produkt produkt = entry.getKey();
 
                 ImageIcon ikona = new ImageIcon(produkt.getIkonka().getPath());
-                Image scaledImage = ikona.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                Image scaledImage = ikona.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
                 JLabel iconlabel = new JLabel(scaledIcon);
-                panel.add(iconlabel);
 
-                JLabel nazwaLabel = new JLabel( produkt.getNazwa());
-                JLabel cenaSprzedarzyLabel = new JLabel("Cena Sprzedaży: " + produkt.getCena());
-                JLabel cenaWytworzeniaLabel = new JLabel("Cena Wytworzenia: " + produkt.getCenaWytworzenia());
-                JLabel czasProdukcjiLabel = new JLabel("Czas Produkcji: " + produkt.getCzasProdukcji());
+                String infoText = "<html><b>Nazwa:</b> " + produkt.getNazwa() +
+                        "<br><b>Cena Sprzedaży:</b> " + produkt.getCena() +
+                        "<br><b>Cena Wytworzenia:</b> " + produkt.getCenaWytworzenia() +
+                        "<br><b>Czas Produkcji:</b> " + produkt.getCzasProdukcji() + "</html>";
+
+                JLabel infoLabel = new JLabel(infoText);
 
                 JPanel infoPanel = new JPanel(new GridLayout(0, 1));
-                infoPanel.add(nazwaLabel);
-                infoPanel.add(cenaSprzedarzyLabel);
-                infoPanel.add(cenaWytworzeniaLabel);
-                infoPanel.add(czasProdukcjiLabel);
+                infoPanel.add(iconlabel);
+                infoPanel.add(infoLabel);
 
                 panel.add(infoPanel);
 
