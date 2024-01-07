@@ -127,6 +127,10 @@ public class GUI extends JFrame {
         StodolaPodglad buttonStodola = new StodolaPodglad();
         panel_informacje.add(buttonStodola);
 
+        // Przycisk do wyswietlania informacji o produktach
+        KatalogProduktow buttonKatalog = new KatalogProduktow();
+        panel_informacje.add(buttonKatalog);
+
         // Dodawanie panelu do ramki
         this.add(panel_informacje,BorderLayout.NORTH);
     }
