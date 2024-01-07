@@ -121,6 +121,20 @@ public class Stodola {
         return 0;
     }
 
+    public int getWycena ()
+    {
+        Set<Map.Entry<Produkt, Integer>> entries = produkty.entrySet();
+        Iterator<Map.Entry<Produkt, Integer>> iteratorProduktow = entries.iterator();
+
+        int suma = 0;
+        while (iteratorProduktow.hasNext())
+        {
+            Map.Entry<Produkt, Integer> entry = iteratorProduktow.next();
+            suma += entry.getKey().getCena()*entry.getValue();
+        }
+        return suma;
+    }
+
     public int getCenaWytworzeniaProduktu(String nazwa)
     {
         for (Produkt produkt : produkty.keySet())
