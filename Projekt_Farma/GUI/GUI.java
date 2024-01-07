@@ -106,31 +106,53 @@ public class GUI extends JFrame {
     }
 
     private void GUI_PasekInformacyjny() {
-        // Tworzenie gornego pasaka z informacjami
+        // Tworzenie gornego paska z informacjami
         JPanel panel_informacje = new JPanel();
+        panel_informacje.setLayout(new BorderLayout());
         panel_informacje.setPreferredSize(new Dimension(szerokoscEkranu,wysokoscPaskaInformacyjnego));
         panel_informacje.setBackground(Color.decode("#f0bd8d"));
 
-        // Tekst wyswietlany na pasku
+        JPanel panelNazwa = new JPanel();
+        panelNazwa.setLayout(new BoxLayout(panelNazwa, BoxLayout.Y_AXIS));
+        panelNazwa.setBackground(Color.decode("#f0bd8d"));
+        JLabel nazwa = new JLabel(" " + Gra.getInstance().getFarmaGracza().getNazwaFarmy());
+        JLabel endl = new JLabel(" ");
+        nazwa.setFont(new Font("Monospaced", Font.BOLD, 12));
+        panelNazwa.add(endl);
+        panelNazwa.add(nazwa);
+        panel_informacje.add(panelNazwa, BorderLayout.WEST);
 
-        JLabel tekst = new JLabel("Nazwa Farmy: "+ Gra.getInstance().getFarmaGracza().getNazwaFarmy( )
-                + ", Monety = " + Gra.getInstance().getLiczbaMonet());
+        JPanel panelMonety = new JPanel();
+        panelMonety.setLayout(new BoxLayout(panelMonety, BoxLayout.Y_AXIS));
+        panelMonety.setBackground(Color.decode("#f0bd8d"));
+        ImageIcon ikonaMonety = new ImageIcon("grafika/monety.png");
+        Image malyObrazek = ikonaMonety.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        ImageIcon maleMonety = new ImageIcon(malyObrazek);
+        JLabel monety = new JLabel(String.valueOf(Gra.getInstance().getLiczbaMonet()) + " ");
+        monety.setFont(new Font("Monospaced", Font.BOLD, 20));
+        JLabel etykietaMonety = new JLabel(maleMonety);
+        panelMonety.add(etykietaMonety);
+        panelMonety.add(monety);
+        panel_informacje.add(panelMonety, BorderLayout.EAST);
 
-        // Obsluga sposobu wyswietlania
-        tekst.setPreferredSize(new Dimension(szerokoscEkranu, wysokoscPaskaInformacyjnego/2));
-        tekst.setFont(new Font(null, Font.BOLD, 20));
-        tekst.setHorizontalAlignment(JLabel.CENTER);
-        tekst.setVerticalAlignment(JLabel.CENTER);
 
-        panel_informacje.add(tekst);
+        JLabel tytul = new JLabel("FARMA", SwingConstants.CENTER);
+        tytul.setFont(new Font("Monospaced", Font.BOLD, 50));
+        tytul.setForeground(Color.decode("#26180b"));
+        panel_informacje.add(tytul, BorderLayout.CENTER);
 
+
+        JPanel przyciski = new JPanel(new FlowLayout());
+        przyciski.setBackground(Color.decode("#f0bd8d"));
         // Przycisk do otwierania stodoly
         StodolaPodglad buttonStodola = new StodolaPodglad();
-        panel_informacje.add(buttonStodola);
+        przyciski.add(buttonStodola);
 
         // Przycisk do wyswietlania informacji o produktach
         KatalogProduktow buttonKatalog = new KatalogProduktow();
-        panel_informacje.add(buttonKatalog);
+        przyciski.add(buttonKatalog);
+
+        panel_informacje.add(przyciski, BorderLayout.SOUTH);
 
         // Dodawanie panelu do ramki
         this.add(panel_informacje,BorderLayout.NORTH);
