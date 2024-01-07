@@ -297,9 +297,6 @@ public class GUI extends JFrame {
                     if (pole instanceof Przetwornia == false && pole instanceof Zagroda == false && pole instanceof Pole_Uprawne == false) {
                         // Jeśli nie, pokazujemy menu wyboru
                         popupMenu.show(me.getComponent(), me.getX(), me.getY());
-                    } else {
-                        // Jeśli tak, wyświetlamy komunikat, że pole jest już zagospodarowane
-                        JOptionPane.showMessageDialog(null, "To pole jest już zagospodarowane!");
                     }
                 }
             }
