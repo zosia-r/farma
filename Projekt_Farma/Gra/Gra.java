@@ -3,7 +3,7 @@ import Farma.Farma;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
-
+import Ranking.Ranking;
 import java.io.ObjectOutput;
 import java.io.*;
 import java.util.*;
@@ -139,7 +139,7 @@ public class Gra implements Serializable
         Ranking ranking = new Ranking();
 
     }
-    
+
     private static void Serializacja()
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
