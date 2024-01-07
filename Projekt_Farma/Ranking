@@ -18,13 +18,21 @@ public class Ranking extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JTextArea textArea = new JTextArea();
-        for (String wynik : wyniki) {
-            textArea.append(wynik + "\n");
-        }
-        textArea.setEditable(false);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        JLabel titleLabel = new JLabel("Ranking");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.YELLOW);
+        panel.add(titleLabel);
+
+        for (int i = 0; i < wyniki.size(); i++) {
+            String wynik = wyniki.get(i);
+            JLabel wynikLabel = new JLabel((i + 1) + ". " + wynik);
+            panel.add(wynikLabel);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(panel);
         add(scrollPane, BorderLayout.CENTER);
 
         setVisible(true);
