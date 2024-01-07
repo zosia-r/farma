@@ -14,7 +14,7 @@ public class Ranking extends JFrame {
         wczytajWyniki();
 
         setTitle("Ranking Wyników");
-        setSize(300, 200);
+        setSize(160, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
