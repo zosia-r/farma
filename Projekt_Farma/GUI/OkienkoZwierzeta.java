@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -8,10 +9,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIDefaults;
 
 import Gra.Gra;
 import Kawalek_Ziemi.Kawalek_Ziemi;
@@ -20,11 +23,17 @@ import zwierzeta.Krowa;
 import zwierzeta.Kura;
 import zwierzeta.Swinia;
 
+import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+import java.awt.*;
+import java.util.Enumeration;
+
 public class OkienkoZwierzeta extends JButton {
 
     String[] zwierzeta = {"krowy", "kury", "swinki"};
-    JFrame zwierzetaOkno = new JFrame("Zwierzęta");
     private Kura dowolneZwierze = new Kura();
+    JFrame zwierzetaOkno = new JFrame("Kup zwierzęta (cena: " + dowolneZwierze.getCena() + ")");
     private int x;
     private int y;
 
@@ -43,14 +52,24 @@ public class OkienkoZwierzeta extends JButton {
 
         // Ustawiamy kolor tła całego okna na brązowy
         // newFrame.getContentPane().setBackground(new Color(139, 69, 19)); // RGB dla brązowego koloru
+    	
 
+    	Color backgroundColor = new Color(118, 131, 39);
+    	zwierzetaOkno.setBackground(backgroundColor);
+    	
+    	/*
         // Dodajemy etykietę z tekstem do nowego okna
         JLabel label = new JLabel("Kup zwierzeta (cena: " + dowolneZwierze.getCena() + ")");
         label.setHorizontalAlignment(JLabel.CENTER);
+        label.setBackground(backgroundColor);
         zwierzetaOkno.getContentPane().add(label, BorderLayout.NORTH);
 
+		*/
+    	
         // Ustawiamy nowy zarządca komponentów BorderLayout
         JPanel mainPanel = new JPanel(new GridLayout(1, 3));
+
+        mainPanel.setBackground(backgroundColor);
         
         // Tworzymy przyciski upraw
         for (int i = 0; i < zwierzeta.length; i++) {
@@ -66,7 +85,7 @@ public class OkienkoZwierzeta extends JButton {
 
         // Ustawiamy okno na środku ekranu
         zwierzetaOkno.setLocationRelativeTo(null);
-
+    	
         // Ustawiamy widoczność okna
         zwierzetaOkno.setVisible(true);
 
@@ -96,6 +115,10 @@ public class OkienkoZwierzeta extends JButton {
     	} else {
     		System.out.println("Nie znaleziono ikonki");
     	}
+    	
+    	zwierzePrzycisk.setContentAreaFilled(false); // Ustawienie przezroczystości tła
+    	zwierzePrzycisk.setBorderPainted(false); // Usunięcie rysowania ramki
+    	zwierzePrzycisk.setFocusPainted(false); // Usunięcie podświetlenia przy fokusowaniu
     	
     	zwierzePrzycisk.addActionListener(new ActionListener() {
             @Override
