@@ -125,6 +125,7 @@ public class Gra implements Serializable
     private void koniecGry() {
         System.out.println("Koniec gry!");
         // Tutaj zapis wyniku do pliku z rankingiem?
+        dodajMonety(farmaGracza.getStodola().getWycena());
         setMonetyNaKoniec(liczbaMonet);
         Serializacja();
         Deserializacja();
