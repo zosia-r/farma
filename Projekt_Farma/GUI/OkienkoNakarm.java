@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -20,9 +21,10 @@ import Kawalek_Ziemi.Zagroda;
 public class OkienkoNakarm extends JButton {
 
     String[] opcje = {"pszenica", "żyto", "usuń zwierzę"};
-    JFrame opcjeOkno = new JFrame("Nakarm");
+    JFrame opcjeOkno = new JFrame("Nakarm zwierzę");
     private int x;
     private int y;
+    
 
     public OkienkoNakarm(int x, int y) {
         super();
@@ -36,21 +38,24 @@ public class OkienkoNakarm extends JButton {
 
         // Ustawiamy domyślne działanie po naciśnięciu przycisku zamknięcia
     	opcjeOkno.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    	
+    	Color backgroundColor = new Color(118, 131, 39);
+    	//opcjeOkno.setBackground(backgroundColor);
 
         // Ustawiamy kolor tła całego okna na brązowy
         // newFrame.getContentPane().setBackground(new Color(139, 69, 19)); // RGB dla brązowego koloru
 
-        // Dodajemy etykietę z tekstem do nowego okna
-        JLabel label = new JLabel("Wybierz pokarm");
-        label.setHorizontalAlignment(JLabel.CENTER);
-        opcjeOkno.getContentPane().add(label, BorderLayout.NORTH);
-
         // Ustawiamy nowy zarządca komponentów BorderLayout
         JPanel mainPanel = new JPanel(new GridLayout(1, 3));
+        //mainPanel.setBackground(backgroundColor);
         
         // Tworzymy przyciski upraw
         for (int i = 0; i < opcje.length; i++) {
             JButton productButton = przyciskNakarm(opcje[i]);
+            productButton.setContentAreaFilled(false); // Ustawienie przezroczystości tła
+            productButton.setBorderPainted(false); // Usunięcie rysowania ramki
+            productButton.setFocusPainted(false); // Usunięcie podświetlenia przy fokusowaniu
+        	
             mainPanel.add(productButton);
         }
 
