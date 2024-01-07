@@ -1,10 +1,10 @@
 package GUI;
 
 import Gra.Gra;
-import Farma.Farma;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,8 +68,24 @@ public class Start extends JFrame
         gbc.insets = new Insets(5, 5, 5, 5);
 
         JLabel etykieta = new JLabel("Wpisz nazwę swojej farmy");
-        etykieta.setFont(new Font("Monospaced", Font.BOLD, 10));
+        etykieta.setFont(new Font("Monospaced", Font.BOLD, 15));
+        etykieta.setForeground(Color.decode("#f0bd8d"));
         poleTekstowe = new JTextField(15);
+        //ograniczam liczbe wpisywanych znakow do 9
+        ((AbstractDocument) poleTekstowe.getDocument()).setDocumentFilter(new DocumentFilter() {
+        @Override
+        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+            if ((fb.getDocument().getLength() + string.length()) <= 9)
+                super.insertString(fb, offset, string, attr);
+        }
+
+        @Override
+        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+            if ((fb.getDocument().getLength() + text.length() - length) <= 9)
+                super.replace(fb, offset, length, text, attrs);
+        }
+        });
+
         poleTekstowe.setFont(new Font("Monospaced", Font.BOLD, 15));
         poleTekstowe.setBackground(Color.decode("#f0bd8d"));
         poleTekstowe.setBorder(new LineBorder(Color.decode("#26180b"),1));
@@ -99,6 +115,7 @@ public class Start extends JFrame
         button.addActionListener(new buttonListener());
     }
 
+
     class poleTekstoweListerer implements ActionListener
     {
         @Override
@@ -112,8 +129,8 @@ public class Start extends JFrame
 
     class buttonListener implements ActionListener
     {
-       @Override
-       public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
             GUI gui = new GUI();
             zamknijRamke();
