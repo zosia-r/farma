@@ -4,6 +4,7 @@ import Gra.Gra;
 import Produkt.Produkt;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,45 +25,50 @@ public class StodolaPodglad extends JButton {
 
     static class StodolaListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            Map<Produkt, Integer> produkty = Gra.getInstance().getFarmaGracza().getStodola().getProdukty();
 
-            JDialog ramka = new JDialog();
-            ramka.setTitle("Stodoła");
-            ramka.setFont(new Font("Monospaced", Font.BOLD, 15));
-            ramka.setSize(400, 400);
-            ramka.setResizable(false);
-            ramka.setLocationRelativeTo(null);
-            ramka.setAlwaysOnTop(true);
+            if (Gra.getInstance().getPozostalyCzas() > 0)
+            {
+                Map<Produkt, Integer> produkty = Gra.getInstance().getFarmaGracza().getStodola().getProdukty();
 
-            JPanel panel = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    ImageIcon tlo = new ImageIcon("grafika/drewnianaSciana.png");
-                    g.drawImage(tlo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                JDialog ramka = new JDialog();
+                ramka.setTitle("Stodoła");
+                ramka.setFont(new Font("Monospaced", Font.BOLD, 15));
+                ramka.setSize(400, 400);
+                ramka.setResizable(false);
+                ramka.setLocationRelativeTo(null);
+                ramka.setAlwaysOnTop(true);
+
+                JPanel panel = new JPanel() {
+                    @Override
+                    protected void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        ImageIcon tlo = new ImageIcon("grafika/drewnianaSciana.png");
+                        g.drawImage(tlo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                    }
+                };
+
+                panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+
+                for (Map.Entry<Produkt, Integer> entry : produkty.entrySet()) {
+                    if (entry.getValue() > 0) {
+                        ImageIcon ikona = new ImageIcon(entry.getKey().getIkonka().getPath());
+                        Image scaledImage = ikona.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+                        JButton button = new JButton(scaledIcon);
+                        button.setOpaque(false);
+                        button.setContentAreaFilled(false);
+                        button.setBorderPainted(false);
+
+                        button.addActionListener(new ProduktListener(entry.getKey().getNazwa(), button));
+                        panel.add(button);
+                    }
                 }
-            };
 
-            panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-
-            for (Map.Entry<Produkt, Integer> entry : produkty.entrySet()) {
-                if (entry.getValue() > 0) {
-                    ImageIcon ikona = new ImageIcon(entry.getKey().getIkonka().getPath());
-                    Image scaledImage = ikona.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-                    ImageIcon scaledIcon = new ImageIcon(scaledImage);
-
-                    JButton button = new JButton(scaledIcon);
-                    button.setOpaque(false);
-                    button.setContentAreaFilled(false);
-                    button.setBorderPainted(false);
-
-                    button.addActionListener(new ProduktListener(entry.getKey().getNazwa(), button));
-                    panel.add(button);
-                }
+                ramka.setContentPane(panel);
+                ramka.setVisible(true);
             }
 
-            ramka.setContentPane(panel);
-            ramka.setVisible(true);
         }
     }
 
