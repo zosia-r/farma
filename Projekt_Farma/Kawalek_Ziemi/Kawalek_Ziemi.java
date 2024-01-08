@@ -37,68 +37,65 @@ public abstract class Kawalek_Ziemi implements Podmiot
 
                 InformacjeProduktPole obserwatorIkonkaPola = (InformacjeProduktPole) obserwatorzy.get(0);
                 if (obserwatorIkonkaPola.isCzyZagroda()) {
+                	// wybieranie ikonki jesli pole jest zagroda
                 	if (obserwatorIkonkaPola.getZwierze() == null) {
             			ikonka = ikonkaPodstawowa;
             		}
                 	else if (obserwatorIkonkaPola.getZwierze() != null) {
+                		ImageIcon icon;
                 		if (obserwatorIkonkaPola.isCzyProdukuje() == false) {
-                			ImageIcon icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkiGlodne());
-                			ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                			icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkiGlodne());
                 		} else if (obserwatorIkonkaPola.isGotoweDoZebrania() == false) {
-                			ImageIcon icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkiJedzace());
-                			ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                			icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkiJedzace());
                 		}  else {
-                			ImageIcon icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkigotowe());
-                			ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                			icon = new ImageIcon(obserwatorIkonkaPola.getZwierze().getAdresIkonkigotowe());
                 		}
+            			ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
             		}
                 }
                 else if (obserwatorIkonkaPola.getNazwa().equals("")) {
+                	// wybieranie ikonki jesli na polu nic nie jest produkowane
                 	ikonka = ikonkaPodstawowa;
                 }
                 else if (obserwatorIkonkaPola.isGotoweDoZebrania() == false) {
+                	// wybieranie ikonki jesli produkt jest w trakcie produkcji
+                	ImageIcon icon;
                 	if (obserwatorIkonkaPola.getNazwa().equals("pszenica") || obserwatorIkonkaPola.getNazwa().equals("żyto")) {
-                		ImageIcon icon = new ImageIcon("grafika/zasianeZboze.png");
-                        ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                		icon = new ImageIcon("grafika/zasianeZboze.png");
                 	} else if (obserwatorIkonkaPola.getNazwa().equals("jabłka") || obserwatorIkonkaPola.getNazwa().equals("gruszki")) {
-                	    ImageIcon icon = new ImageIcon("grafika/zasadzoneDrzewo.png");
-                	    ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                	    icon = new ImageIcon("grafika/zasadzoneDrzewo.png");
                 	} else if (obserwatorIkonkaPola.getNazwa().equals("winogrona")) {
-                	    ImageIcon icon = new ImageIcon("grafika/zasadzonaWinorosl.png");
-                	    ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                	    icon = new ImageIcon("grafika/zasadzonaWinorosl.png");
                 	} 
-                	// Kolejne pola produkujace
                 	else {
-                	    ikonka = ikonkaPodstawowa;
+                		icon = new ImageIcon("grafika/pustePoleUprawne");
                 	}
+                	ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
                 	
                 }
                 else {
+                	// wybieranie ikonki jesli produkt jest wyprodukowany
+                	ImageIcon icon;
                 	if (obserwatorIkonkaPola.getNazwa().equals("pszenica")) {
-                		ImageIcon icon = new ImageIcon("grafika/gotowaPszenica.png");
-                        ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                		icon = new ImageIcon("grafika/gotowaPszenica.png");
                 	} else if (obserwatorIkonkaPola.getNazwa().equals("żyto")) {
-                		ImageIcon icon = new ImageIcon("grafika/gotoweZyto.png");
-                        ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                		icon = new ImageIcon("grafika/gotoweZyto.png");
                 	} else if (obserwatorIkonkaPola.getNazwa().equals("jabłka")) {
-                	    ImageIcon icon = new ImageIcon("grafika/gotowaJablon.png");
-                	    ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                	    icon = new ImageIcon("grafika/gotowaJablon.png");
                 	} else if (obserwatorIkonkaPola.getNazwa().equals("gruszki")) {
-                	    ImageIcon icon = new ImageIcon("grafika/gotowaGrusza.png");
-                	    ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                	    icon = new ImageIcon("grafika/gotowaGrusza.png");
                 	} else if (obserwatorIkonkaPola.getNazwa().equals("winogrona")) {
-                	    ImageIcon icon = new ImageIcon("grafika/gotoweWinogrono.png");
-                	    ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
+                	    icon = new ImageIcon("grafika/gotoweWinogrono.png");
                 	} 
-                	// Kolejne pola gotowe
                 	else {
-                	    ikonka = ikonkaPodstawowa;
+                		icon = new ImageIcon("grafika/pustePoleUprawne");
                 	}
+                	ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
                 }
             }
         });
 
-        // Uruchamiamy timer co 0.1 sekundy (FPS)
+        // Uruchamiamy timer co 0.1 sekundy
         timer2.start();
         
     }
