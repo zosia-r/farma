@@ -7,6 +7,8 @@ import Ranking.Ranking;
 import java.io.ObjectOutput;
 import java.io.*;
 import java.util.*;
+import java.util.Random;
+import Strategia.*;
 
 public class Gra implements Serializable
 {
@@ -15,6 +17,7 @@ public class Gra implements Serializable
     private int liczbaMonet;   // 200 na początku gry
     private int pozostalyCzas; // w sekundach
     private static Farma farmaGracza; // farma gracza
+    Strategia strategiaInterfejs;
 
     private static ArrayList<String> Wyniki; //zeby stad pobrac dane do wyswietlanego rankingu
     private static int MonetyNaKoniec; //zeby uzyc w statycznej metodzie serializacji
@@ -26,6 +29,7 @@ public class Gra implements Serializable
         this.pozostalyCzas = CZAS_STARTOWY;
         this.farmaGracza = new Farma();
         startTimer();
+        uruchomTimerDoKatastrof();
         this.Wyniki = new ArrayList<>();
     }
     public static Gra getInstance()
@@ -170,5 +174,63 @@ public class Gra implements Serializable
         int monety2 = Integer.parseInt(linia2.split(":")[1].trim());
         return Integer.compare(monety2, monety1);
     }
+
+    public void uruchomTimerDoKatastrof() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                katastrofa();
+            }
+        }, 0, 20 * 1000);  // timer wywoluje metode katastrofa() co 20s
+    }
+    public  String katastrofa() {
+
+        String  komunikat=null;//ten komunikat bedziemy pozniej wyswietlac w wyskakujacym okienku informaujacym o katastrofie
+
+        if (CzyBedzieKatastrofa() == 1) {
+
+            Random random = new Random();
+            int wylosowanaLiczba = random.nextInt(4) + 1;
+
+            if (wylosowanaLiczba == 1) {
+                strategiaInterfejs = new Strategia1();
+                strategiaInterfejs.katastrofa();
+                komunikat= "Twoja stodoła spłoneła.Tracisz wszystkie produkty";
+
+            } else if (wylosowanaLiczba == 2) {
+                strategiaInterfejs = new Strategia2();
+                strategiaInterfejs.katastrofa();
+                komunikat="Twoje uprawy zostały zniszczone";
+
+            } else if (wylosowanaLiczba == 3) {
+                strategiaInterfejs = new Strategia3();
+                strategiaInterfejs.katastrofa();
+                komunikat= "Twoje zwierzęta są chore, nie mogą teraz nic produkować";
+
+            } else if(wylosowanaLiczba == 4){
+                strategiaInterfejs = new Strategia4();
+                strategiaInterfejs.katastrofa();
+                komunikat="Wygląda na to, że nie masz prądu, niestety twoje przetwórnie teraz nie działają";
+            }
+        }
+        return komunikat;
+    }
+    public int CzyBedzieKatastrofa()
+    {
+        // prawdopodobieństwa dla 1(bedzie katastrofa) i 0 (nie bedzie katastrofy) -w procentach
+        double prawdopodobienstwo_1 = 25;
+        double prawdopodobienstwo_0 = 100 - prawdopodobienstwo_1;
+
+        Random random = new Random();
+        int wylosowanaLiczba=random.nextInt(100) + 1;
+        if (wylosowanaLiczba < prawdopodobienstwo_1) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
 
 }
