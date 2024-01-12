@@ -54,7 +54,7 @@ public class Gra implements Serializable
             return String.valueOf(pozostalyCzas%60);
     }
 
-    public ArrayList<String> getWyniki()
+    public static ArrayList<String> getWyniki()
     {
         return Wyniki;
     }
