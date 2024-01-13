@@ -44,7 +44,6 @@ public class WynikKoncowy implements Comparable<WynikKoncowy> {
 
     @Override
     public int compareTo(WynikKoncowy other) {
-        // Porównanie po ilości monet (lub inny sposób porównywania)
         return Integer.compare(this.monety, other.monety);
     }
 
