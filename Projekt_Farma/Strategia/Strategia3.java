@@ -7,20 +7,27 @@ import Kawalek_Ziemi.Zagroda;
 
 public class Strategia3 implements Strategia{
 
-    private final Kawalek_Ziemi [][] kawalki_ziemi = Gra.getInstance().getFarmaGracza().getKawalki_ziemi();
-    private final String komunikat = "Twoje zwierzęta są chore, nie mogą teraz nic produkować";
+    private final Kawalek_Ziemi [][] kawalkiZiemi;
+    private final String komunikat;
+
+    public Strategia3(String komunikat)
+    {
+        kawalkiZiemi = Gra.getInstance().getFarmaGracza().getKawalki_ziemi();
+        this.komunikat = komunikat;
+    }
 
     public void katastrofa()
     {
         boolean okienko=false;
-        for(int i = 0;i<kawalki_ziemi.length;i++)
+
+        for(int i = 0; i< kawalkiZiemi.length; i++)
         {
-            for(int j= 0;j<kawalki_ziemi[i].length;j++)
+            for(int j = 0; j< kawalkiZiemi[i].length; j++)
             {
-                if(kawalki_ziemi[i][j] instanceof Zagroda)
+                if(kawalkiZiemi[i][j] instanceof Zagroda)
                 {
-                    if(((Zagroda) kawalki_ziemi[i][j]).getZwierze() != null) {
-                        ((Zagroda) kawalki_ziemi[i][j]).usunZwierze();
+                    if(((Zagroda) kawalkiZiemi[i][j]).getZwierze() != null) {
+                        ((Zagroda) kawalkiZiemi[i][j]).usunZwierze();
                         okienko=true;
                     }
                 }
