@@ -4,7 +4,10 @@ import Gra.Gra;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.text.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -111,20 +114,7 @@ public class Start extends JFrame
 
         tlo.add(panel);
 
-        poleTekstowe.addActionListener(new poleTekstoweListerer());
         button.addActionListener(new buttonListener());
-    }
-
-
-    class poleTekstoweListerer implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            String nazwa = poleTekstowe.getText();
-            Gra.getInstance().getFarmaGracza().setNazwaFarmy(nazwa);
-        }
-
     }
 
     class buttonListener implements ActionListener
@@ -132,6 +122,8 @@ public class Start extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            String nazwa = poleTekstowe.getText();
+            Gra.getInstance().getFarmaGracza().setNazwaFarmy(nazwa);
             GUI gui = new GUI();
             zamknijRamke();
         }
