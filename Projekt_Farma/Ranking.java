@@ -15,7 +15,7 @@ public class Ranking extends JFrame {
         this.wyniki = Gra.getWyniki();
 
         setTitle("Ranking Wyników");
-        setSize(240, 300);
+        setSize(480, 600);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
