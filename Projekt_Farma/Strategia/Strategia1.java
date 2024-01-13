@@ -9,8 +9,6 @@ public class Strategia1 implements Strategia {
 
     public Strategia1(String komunikat) {
         this.komunikat = komunikat;
-        if (Gra.getInstance().getPozostalyCzas() > 1) {
-            katastrofa();
         }
     }
     public void katastrofa() {
