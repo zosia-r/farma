@@ -97,5 +97,32 @@ public class Produkt {
             return czasProdukcji; //produkt nie zaczal sie jeszcze"wytwarzac" wiec czas pozostaly do zebrania to czas produkcji
         }
     }
+    
+    public String zCzegoWytworzyc() {
+    	if (nazwa.equals("mleko") || nazwa.equals("jajka") || nazwa.equals("mięso")) {
+    		return "pszenica / żyto";
+    	} else if (nazwa.equals("chleb pszenny")) {
+    		return "jajko i pszenica";
+    	}else if (nazwa.equals("chleb żytni")) {
+    		return "jajko i żyto";
+    	} else if (nazwa.equals("dżem jabłkowy")) {
+    		return "2 jabłka";
+    	} else if (nazwa.equals("dżem gruszkowy")) {
+    		return "2 gruszki";
+    	} else if (nazwa.equals("sok jabłkowy")) {
+    		return "jabłko";
+    	} else if (nazwa.equals("sok gruszkowy")) {
+    		return "gruszka";
+    	} else if (nazwa.equals("masło")) {
+    		return "mleko";
+    	} else if (nazwa.equals("szynka")) {
+    		return "2 mięsa";
+    	} else if (nazwa.equals("kiełbasa")) {
+    		return "mięso";
+    	} else {
+    		return (getCenaWytworzenia() + "");
+    	}
+    			
+    }
 
 }
