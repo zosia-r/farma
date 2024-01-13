@@ -180,13 +180,11 @@ public class Gra implements Serializable
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                katastrofa();
+                wywolanieKatastrofy();
             }
         }, 0, 20 * 1000);  // timer wywoluje metode katastrofa() co 20s
     }
-    public  String katastrofa() {
-
-        String  komunikat=null;//ten komunikat bedziemy pozniej wyswietlac w wyskakujacym okienku informaujacym o katastrofie
+    public void wywolanieKatastrofy() {
 
         if (CzyBedzieKatastrofa() == 1) {
 
@@ -194,27 +192,22 @@ public class Gra implements Serializable
             int wylosowanaLiczba = random.nextInt(4) + 1;
 
             if (wylosowanaLiczba == 1) {
-                strategiaInterfejs = new Strategia1();
+                strategiaInterfejs = new Strategia1("Twoja stodoła spłonęła. Tracisz wszystkie produkty");
                 strategiaInterfejs.katastrofa();
-                komunikat= "Twoja stodoła spłoneła.Tracisz wszystkie produkty";
 
             } else if (wylosowanaLiczba == 2) {
-                strategiaInterfejs = new Strategia2();
+                strategiaInterfejs = new Strategia2("Twoje uprawy zostały zniszczone");
                 strategiaInterfejs.katastrofa();
-                komunikat="Twoje uprawy zostały zniszczone";
 
             } else if (wylosowanaLiczba == 3) {
-                strategiaInterfejs = new Strategia3();
+                strategiaInterfejs = new Strategia3("Twoje zwierzęta są chore, nie mogą teraz nic produkować");
                 strategiaInterfejs.katastrofa();
-                komunikat= "Twoje zwierzęta są chore, nie mogą teraz nic produkować";
 
             } else if(wylosowanaLiczba == 4){
-                strategiaInterfejs = new Strategia4();
+                strategiaInterfejs = new Strategia4("Wygląda na to, że nie masz prądu. Niestety twoje przetwórnie teraz nie działają");
                 strategiaInterfejs.katastrofa();
-                komunikat="Wygląda na to, że nie masz prądu, niestety twoje przetwórnie teraz nie działają";
             }
         }
-        return komunikat;
     }
     public int CzyBedzieKatastrofa()
     {
