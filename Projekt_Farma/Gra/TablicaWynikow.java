@@ -11,7 +11,6 @@ public class TablicaWynikow {
         wyniki = new ArrayList<WynikKoncowy>();
         StworzKomparator();
     }
-
     static class WynikCompare_Monety implements Comparator<WynikKoncowy>
     {
         public int compare(WynikKoncowy w1, WynikKoncowy w2)
