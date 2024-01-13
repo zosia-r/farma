@@ -186,6 +186,7 @@ public class Gra implements Serializable
     }
 
 
+
     public void uruchomTimerDoKatastrof() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -197,7 +198,7 @@ public class Gra implements Serializable
     }
     public void wywolanieKatastrofy() {
 
-        if (CzyBedzieKatastrofa() == 1) {
+        if (CzyBedzieKatastrofa() == 1 && pozostalyCzas>1 && pozostalyCzas<299) {
 
             Random random = new Random();
             int wylosowanaLiczba = random.nextInt(4) + 1;
@@ -207,11 +208,11 @@ public class Gra implements Serializable
                 strategiaInterfejs.katastrofa();
 
             } else if (wylosowanaLiczba == 2) {
-                strategiaInterfejs = new Strategia2("Twoje uprawy zostały zniszczone");
+                strategiaInterfejs = new Strategia2("Twoje uprawy zostały zniszczone") ;
                 strategiaInterfejs.katastrofa();
 
             } else if (wylosowanaLiczba == 3) {
-                strategiaInterfejs = new Strategia3("Twoje zwierzęta są chore, nie mogą teraz nic produkować");
+                strategiaInterfejs = new Strategia3();
                 strategiaInterfejs.katastrofa();
 
             } else if(wylosowanaLiczba == 4){
