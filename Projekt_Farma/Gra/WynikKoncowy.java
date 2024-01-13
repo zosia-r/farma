@@ -39,7 +39,7 @@ public class WynikKoncowy implements Comparable<WynikKoncowy> {
 
     public String toString()
     {
-        return nazwa + ", Wynik: " + monety;
+        return nazwa + " Wynik: " + monety;
     }
 
     @Override
