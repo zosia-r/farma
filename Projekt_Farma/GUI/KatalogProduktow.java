@@ -43,7 +43,7 @@ public class KatalogProduktow extends JButton{
 
                 String infoText = "<html><b>Nazwa:</b> " + produkt.getNazwa() +
                         "<br><b>Cena Sprzedaży:</b> " + produkt.getCena() +
-                        "<br><b>Cena Wytworzenia:</b> " + produkt.getCenaWytworzenia() +
+                        "<br><b>Cena Wytworzenia:</b> " + produkt.zCzegoWytworzyc() +
                         "<br><b>Czas Produkcji:</b> " + produkt.getCzasProdukcji() + "</html>";
 
                 JLabel infoLabel = new JLabel(infoText);
