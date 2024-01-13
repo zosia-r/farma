@@ -13,7 +13,6 @@ public class Strategia4 implements Strategia
     {
         kawalkiZiemi = Gra.getInstance().getFarmaGracza().getKawalki_ziemi();
         this.komunikat = komunikat;
-        katastrofa();
     }
 
 
