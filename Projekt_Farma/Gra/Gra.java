@@ -151,12 +151,10 @@ public class Gra implements Serializable
         }
         tabwynikow.getWyniki().sort(new TablicaWynikow.WynikCompare_Monety());
         //Collections.sort(tabwynikow.getWyniki(), tabwynikow.getComparator1());
-        //tabwynikow.getWyniki().sort(tabwynikow.getComparator1());
         for(int j=0; j<tabwynikow.getWyniki().size(); j++)
         {
             Wyniki.add(((WynikKoncowy)((tabwynikow.getWyniki()).get(j))).toString());
         }
-        //Wyniki.sort(Gra::porownajWyniki);
         Ranking ranking = new Ranking();
 
     }
@@ -165,7 +163,6 @@ public class Gra implements Serializable
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
             writer.write(farmaGracza.getNazwaFarmy() + "," + MonetyNaKoniec);
-            //writer.write(farmaGracza.getNazwaFarmy() + ", Wynik: " + MonetyNaKoniec);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -182,19 +179,12 @@ public class Gra implements Serializable
                 String[] czesci = line.split(",");
                 tabwynikow.getWyniki().add(new WynikKoncowy(czesci[0], Integer.parseInt(czesci[1])));
                 Collections.sort(tabwynikow.getWyniki(), tabwynikow.getComparator1());
-                //Wyniki.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    //zeby byly malejaco w rankingu
-    private static int porownajWyniki(String linia1, String linia2) {
-        int monety1 = Integer.parseInt(linia1.split(":")[1].trim());
-        int monety2 = Integer.parseInt(linia2.split(":")[1].trim());
-        return Integer.compare(monety2, monety1);
-    }
 
     public void uruchomTimerDoKatastrof() {
         Timer timer = new Timer();
