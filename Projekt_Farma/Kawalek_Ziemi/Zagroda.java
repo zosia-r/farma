@@ -1,9 +1,9 @@
 package Kawalek_Ziemi;
+import Gra.Gra;
 import Obserwator.Obserwator;
 import Produkt.Produkt;
 import Wyjatek.*;
 import zwierzeta.*;
-import Stodola.*;
 public class Zagroda extends Kawalek_Ziemi {
     private Zwierze zwierze;
     private Produkt pszenica;
@@ -13,8 +13,8 @@ public class Zagroda extends Kawalek_Ziemi {
     {
         super(x, y);
         zwierze = null;
-        pszenica = new Produkt("pszenica",false,20,5,10,"grafika/pszenica.png");
-        zyto = new Produkt("żyto", false, 22, 5,10, "grafika/zyto.png");
+        pszenica = new Produkt("pszenica", false, 7, 2, 10, "grafika/pszenica.png");
+        zyto = new Produkt("żyto", false, 8, 2,10, "grafika/zyto.png");
     }
     public Zwierze getZwierze()
     {
@@ -74,9 +74,9 @@ public class Zagroda extends Kawalek_Ziemi {
     public void nakarmPszenica()
     {
         if(zwierze!=null && zwierze.getGlodne()==true) {
-            if(Stodola.sprawdzDostepnosc("pszenica")!=0) {
+            if(Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("pszenica")!=0) {
                 System.out.println("Nakarmiono");
-                Stodola.usunProdukt(pszenica);
+                Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(pszenica);
                 zwierze.setGlodne(false);
                 rozpocznijProdukcje();
             } else {
@@ -89,8 +89,8 @@ public class Zagroda extends Kawalek_Ziemi {
     public void nakarmZyto()
     {
         if(zwierze!=null && zwierze.getGlodne()==true) {
-            if(Stodola.sprawdzDostepnosc("żyto")!=0) {
-                Stodola.usunProdukt(zyto);
+            if(Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("żyto")!=0) {
+            	Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(zyto);
                 zwierze.setGlodne(false);
                 rozpocznijProdukcje();
             } else {
