@@ -1,7 +1,6 @@
 package Gra;
 import java.util.ArrayList;
 import java.util.Comparator;
-
 public class TablicaWynikow {
     private ArrayList<WynikKoncowy> wyniki;
     private WynikCompare_Monety Comparator1;

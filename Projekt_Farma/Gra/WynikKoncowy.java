@@ -1,6 +1,5 @@
 package Gra;
 
-
 public class WynikKoncowy implements Comparable<WynikKoncowy> {
 
     private String nazwa;

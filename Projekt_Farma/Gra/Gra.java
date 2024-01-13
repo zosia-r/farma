@@ -10,7 +10,6 @@ import java.util.*;
 import java.util.Random;
 import Strategia.*;
 
-
 public class Gra implements Serializable
 {
     private static Gra instance;
