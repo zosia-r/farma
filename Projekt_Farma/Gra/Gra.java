@@ -22,6 +22,8 @@ public class Gra implements Serializable
     private static ArrayList<String> Wyniki; //zeby stad pobrac dane do wyswietlanego rankingu
     private static int MonetyNaKoniec; //zeby uzyc w statycznej metodzie serializacji
 
+    private TablicaWynikow tabwynikow;
+
 
     private Gra()
     {
@@ -31,6 +33,7 @@ public class Gra implements Serializable
         startTimer();
         uruchomTimerDoKatastrof();
         this.Wyniki = new ArrayList<>();
+        this.tabwynikow = new TablicaWynikow();
     }
     public static Gra getInstance()
     {
@@ -57,6 +60,11 @@ public class Gra implements Serializable
     public static ArrayList<String> getWyniki()
     {
         return Wyniki;
+    }
+
+    public  TablicaWynikow getTabwynikow()
+    {
+        return tabwynikow;
     }
     public Farma getFarmaGracza()
     {
@@ -133,14 +141,22 @@ public class Gra implements Serializable
         setMonetyNaKoniec(liczbaMonet);
         Serializacja();
         Deserializacja();
-        for(int i=0; i<Wyniki.size(); i++)
+        Wyniki.clear();
+        for(int i=0; i<tabwynikow.getWyniki().size(); i++)
         {
-            if (Wyniki.get(i).equals(""))
+            if (tabwynikow.getWyniki().get(i).equals(""))
             {
-                Wyniki.remove(i);
+                tabwynikow.getWyniki().remove(i);
             }
         }
-        Wyniki.sort(Gra::porownajWyniki);
+        tabwynikow.getWyniki().sort(new TablicaWynikow.WynikCompare_Monety());
+        //Collections.sort(tabwynikow.getWyniki(), tabwynikow.getComparator1());
+        //tabwynikow.getWyniki().sort(tabwynikow.getComparator1());
+        for(int j=0; j<tabwynikow.getWyniki().size(); j++)
+        {
+            Wyniki.add(((WynikKoncowy)((tabwynikow.getWyniki()).get(j))).toString());
+        }
+        //Wyniki.sort(Gra::porownajWyniki);
         Ranking ranking = new Ranking();
 
     }
@@ -148,7 +164,8 @@ public class Gra implements Serializable
     private static void Serializacja()
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabela_wynikow.txt", true))) {
-            writer.write(farmaGracza.getNazwaFarmy() + ", Wynik: " + MonetyNaKoniec);
+            writer.write(farmaGracza.getNazwaFarmy() + "," + MonetyNaKoniec);
+            //writer.write(farmaGracza.getNazwaFarmy() + ", Wynik: " + MonetyNaKoniec);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,11 +174,15 @@ public class Gra implements Serializable
 
     public void Deserializacja()
     {
-        Wyniki.clear();
+        tabwynikow.getWyniki().clear();
+        tabwynikow.StworzKomparator();
         try (BufferedReader reader = new BufferedReader(new FileReader("Tabela_wynikow.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                Wyniki.add(line);
+                String[] czesci = line.split(",");
+                tabwynikow.getWyniki().add(new WynikKoncowy(czesci[0], Integer.parseInt(czesci[1])));
+                Collections.sort(tabwynikow.getWyniki(), tabwynikow.getComparator1());
+                //Wyniki.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
