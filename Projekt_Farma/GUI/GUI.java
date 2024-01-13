@@ -205,6 +205,10 @@ public class GUI extends JFrame {
                                     Zagroda zagroda = (Zagroda) Gra.getInstance().getFarmaGracza().getKawalki_ziemi()[kawalek_ziemi_x][kawalek_ziemi_y];
                                     zagroda.zbierzProdukt();
                                 }
+                                else if (pole instanceof Przetwornia) {
+                                	Przetwornia przetwornia = (Przetwornia) Gra.getInstance().getFarmaGracza().getKawalki_ziemi()[kawalek_ziemi_x][kawalek_ziemi_y];
+                                	przetwornia.zbierzPrzetwor();
+                                }
                             }
                             // Mozna dodac opcje przerwania produkcji
                         }
@@ -228,6 +232,11 @@ public class GUI extends JFrame {
                                 }
                                 // Tworzymy nowe okno
                                 //OkienkoZasadz newFrame = new OkienkoZwierzeta(kawalek_ziemi_x, kawalek_ziemi_y);
+                            }
+                            if (pole instanceof Przetwornia) {
+                                System.out.println("mozna wybrac przetwor, nic nie jest produkowane");
+                                // Tworzymy nowe okno
+                                OkienkoProdukcja newFrame = new OkienkoProdukcja(kawalek_ziemi_x, kawalek_ziemi_y);
                             }
                         }
 
