@@ -68,7 +68,7 @@ public abstract class Kawalek_Ziemi implements Podmiot
                 	    icon = new ImageIcon("grafika/zasadzonaWinorosl.png");
                 	} 
                 	else {
-                		icon = new ImageIcon("grafika/pustePoleUprawne");
+                		icon = new ImageIcon("grafika/produkujacaPrzetwornia.png");
                 	}
                 	ikonka = icon.getImage().getScaledInstance(74, 70, Image.SCALE_DEFAULT);
                 	
@@ -86,7 +86,25 @@ public abstract class Kawalek_Ziemi implements Podmiot
                 	    icon = new ImageIcon("grafika/gotowaGrusza.png");
                 	} else if (obserwatorIkonkaPola.getNazwa().equals("winogrona")) {
                 	    icon = new ImageIcon("grafika/gotoweWinogrono.png");
-                	} 
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("chleb pszenny")) {
+                	    icon = new ImageIcon("grafika/gotowyChlebPszenny.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("chleb żytni")) {
+                	    icon = new ImageIcon("grafika/gotowyChlebZytni.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("dżem jabłkowy")) {
+                	    icon = new ImageIcon("grafika/gotowyDzemJablkowy.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("dżem gruszkowy")) {
+                	    icon = new ImageIcon("grafika/gotowyDzemGruszkowy.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("sok jabłkowy")) {
+                	    icon = new ImageIcon("grafika/gotowySokJablkowy.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("sok gruszkowy")) {
+                	    icon = new ImageIcon("grafika/gotowySokGruszkowy.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("masło")) {
+                	    icon = new ImageIcon("grafika/gotoweMaslo.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("szynka")) {
+                	    icon = new ImageIcon("grafika/gotowaSzynka.png");
+                	} else if (obserwatorIkonkaPola.getNazwa().equals("kiełbasa")) {
+                	    icon = new ImageIcon("grafika/gotowaKielbasa.png");
+                	}
                 	else {
                 		icon = new ImageIcon("grafika/pustePoleUprawne");
                 	}
