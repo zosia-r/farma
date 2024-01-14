@@ -5,8 +5,11 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import Gra.*;
+import javax.sound.sampled.*;
+
 
 public class Ranking extends JFrame {
     private ArrayList<String> wyniki;
@@ -40,6 +43,7 @@ public class Ranking extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
 
         setVisible(true);
+//        playMusic();
     }
 
     private void wczytajWyniki() {
@@ -52,4 +56,20 @@ public class Ranking extends JFrame {
             e.printStackTrace();
         }
     }
+//    private void playMusic() {
+//        try {
+//            URL url = this.getClass().getClassLoader().getResource("Victory-Theme-Happy-Wheels.wav");
+//            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+//            Clip clip = AudioSystem.getClip();
+//            clip.open(audioIn);
+//            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+//            float range = volume.getMaximum() - volume.getMinimum();
+//            float gain = (range * 0.6f) + volume.getMinimum();
+//            volume.setValue(gain);
+//
+//            clip.start();
+//        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
