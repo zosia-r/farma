@@ -9,6 +9,12 @@ import java.io.*;
 import java.util.*;
 import java.util.Random;
 import Strategia.*;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
+import java.io.IOException;
+import java.net.URL;
+import javax.sound.sampled.FloatControl;
 
 public class Gra implements Serializable
 {
@@ -34,6 +40,7 @@ public class Gra implements Serializable
         uruchomTimerDoKatastrof();
         this.Wyniki = new ArrayList<>();
         this.tabwynikow = new TablicaWynikow();
+//        playMusic();
     }
     public static Gra getInstance()
     {
@@ -236,6 +243,37 @@ public class Gra implements Serializable
         }
 
     }
-
-
+//    private void playMusic() {
+//        try {
+//            if (pozostalyCzas > 1) {
+//                URL url = this.getClass().getClassLoader().getResource("ost-farma-sample2.wav");
+//                AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+//                Clip clip = AudioSystem.getClip();
+//                clip.open(audioIn);
+//                FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+//                float range = volume.getMaximum() - volume.getMinimum();
+//                float gain = (range * 0.6f) + volume.getMinimum();
+//                volume.setValue(gain);
+//                clip.loop(Clip.LOOP_CONTINUOUSLY);
+//                clip.start();
+//
+//                // Dodajemy nowy wątek, który będzie sprawdzał pozostalyCzas co sekundę
+//                new Thread(() -> {
+//                    while (clip.isRunning()) {
+//                        if (pozostalyCzas < 10) {
+//                            clip.stop();
+//                            break;
+//                        }
+//                        try {
+//                            Thread.sleep(1000); // Czekamy sekundę przed kolejnym sprawdzeniem
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }).start();
+//            }
+//        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
