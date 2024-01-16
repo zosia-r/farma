@@ -2,42 +2,39 @@ package Stodola;
 
 import Produkt.Produkt;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.Iterator;
+import java.util.*;
 
 public class Stodola {
 
-    static private Map<Produkt, Integer> produkty = new HashMap<>();
+    static private LinkedHashMap<Produkt, Integer> produkty = new LinkedHashMap<>();
 
     public Stodola()
     {
         //rośliny paszowe
-        produkty.put(new Produkt("pszenica", false, 7, 2, 10, "grafika/pszenica.png"),0);
-        produkty.put(new Produkt("żyto", false, 8, 2,10, "grafika/zyto.png"), 0);
+        produkty.put(new Produkt("pszenica", false, 7, 2, 13, 10, "grafika/pszenica.png"),0);
+        produkty.put(new Produkt("żyto", false, 8, 2,15,10, "grafika/zyto.png"), 0);
         //owoce
-        produkty.put(new Produkt("jabłka", false, 10, 4, 15,"grafika/jablko.png"),0);
-        produkty.put(new Produkt ("gruszki", false, 10,4,  15, "grafika/gruszka.png"), 0);
-        produkty.put(new Produkt("winogrona", false, 15 ,5,  15, "grafika/winogrono.png"), 0);
+        produkty.put(new Produkt("jabłka", false, 10, 4, 20,15,"grafika/jablko.png"),0);
+        produkty.put(new Produkt ("gruszki", false, 10,4,  20, 15, "grafika/gruszka.png"), 0);
+        produkty.put(new Produkt("winogrona", false, 15 ,5,  20,15, "grafika/winogrono.png"), 0);
         //odzwierzęce
-        produkty.put(new Produkt("mleko", false, 15, 0, 10, "grafika/mleko.png"), 0);
-        produkty.put(new Produkt("jajka", false, 16, 0, 10, "grafika/jajko.png"), 0);
-        produkty.put(new Produkt("mięso", false, 20, 0, 10,"grafika/mieso.png"), 0);
+        produkty.put(new Produkt("mleko", false, 15, 0, 20,10, "grafika/mleko.png"), 0);
+        produkty.put(new Produkt("jajka", false, 16, 0, 18,10, "grafika/jajko.png"), 0);
+        produkty.put(new Produkt("mięso", false, 20, 0, 30,10,"grafika/mieso.png"), 0);
         //przetwory
-        produkty.put(new Produkt("chleb pszenny", false, 60, 0, 10, "grafika/chlebPszenny.png"), 0);
-        produkty.put(new Produkt("chleb żytni", false, 65, 0, 10, "grafika/chlebZytni.png"), 0);
-        produkty.put(new Produkt("dżem jabłkowy", false, 45, 0, 8, "grafika/dzemJablkowy.png"), 0);
-        produkty.put(new Produkt("dżem gruszkowy", false, 45, 0, 8, "grafika/dzemGruszkowy.png"), 0);
-        produkty.put(new Produkt("sok jabłkowy", false, 20, 0, 9, "grafika/sokJablkowy.png"), 0);
-        produkty.put(new Produkt("sok gruszkowy", false, 20, 0, 9, "grafika/sokGruszkowy.png"), 0);
-        produkty.put(new Produkt("masło", false, 30, 0, 10, "grafika/maslo.png"), 0);
-        produkty.put(new Produkt("szynka", false, 70, 0, 15, "grafika/szynka.png"), 0);
-        produkty.put(new Produkt("kiełbasa", false, 35, 0, 10, "grafika/kielbasa.png"), 0);
+        produkty.put(new Produkt("chleb pszenny", false, 60, 0, 62, 10, "grafika/chlebPszenny.png"), 0);
+        produkty.put(new Produkt("chleb żytni", false, 65, 0, 67, 10, "grafika/chlebZytni.png"), 0);
+        produkty.put(new Produkt("dżem jabłkowy", false, 45, 0, 47,8, "grafika/dzemJablkowy.png"), 0);
+        produkty.put(new Produkt("dżem gruszkowy", false, 45, 0, 47,8, "grafika/dzemGruszkowy.png"), 0);
+        produkty.put(new Produkt("sok jabłkowy", false, 20, 0, 22,9, "grafika/sokJablkowy.png"), 0);
+        produkty.put(new Produkt("sok gruszkowy", false, 20, 0, 22,9, "grafika/sokGruszkowy.png"), 0);
+        produkty.put(new Produkt("masło", false, 30, 0, 32,10, "grafika/maslo.png"), 0);
+        produkty.put(new Produkt("szynka", false, 70, 0, 72,15, "grafika/szynka.png"), 0);
+        produkty.put(new Produkt("kiełbasa", false, 35, 0, 37,10, "grafika/kielbasa.png"), 0);
 
     }
 
-    public Map<Produkt, Integer> getProdukty()
+    public LinkedHashMap<Produkt, Integer> getProdukty()
     {
         return produkty;
     }
