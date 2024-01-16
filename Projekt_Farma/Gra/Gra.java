@@ -3,12 +3,13 @@ import Farma.Farma;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
+
+import Katastrofa.*;
 import Ranking.Ranking;
 import java.io.ObjectOutput;
 import java.io.*;
 import java.util.*;
 import java.util.Random;
-import Strategia.*;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
@@ -23,7 +24,7 @@ public class Gra implements Serializable
     private int liczbaMonet;   // 200 na początku gry
     private int pozostalyCzas; // w sekundach
     private static Farma farmaGracza; // farma gracza
-    Strategia strategiaInterfejs;
+    Katastrofa katastrofaInterfejs;
 
     private static ArrayList<String> Wyniki; //zeby stad pobrac dane do wyswietlanego rankingu
     private static int MonetyNaKoniec; //zeby uzyc w statycznej metodzie serializacji
@@ -40,7 +41,7 @@ public class Gra implements Serializable
         uruchomTimerDoKatastrof();
         this.Wyniki = new ArrayList<>();
         this.tabwynikow = new TablicaWynikow();
-//        playMusic();
+        //playMusic();
     }
     public static Gra getInstance()
     {
@@ -211,20 +212,20 @@ public class Gra implements Serializable
             int wylosowanaLiczba = random.nextInt(4) + 1;
 
             if (wylosowanaLiczba == 1) {
-                strategiaInterfejs = new Strategia1("Twoja stodoła spłonęła. Tracisz wszystkie produkty");
-                strategiaInterfejs.katastrofa();
+                katastrofaInterfejs = new KatastrofaStodola("Twoja stodoła spłonęła. Tracisz wszystkie produkty");
+                katastrofaInterfejs.katastrofa();
 
             } else if (wylosowanaLiczba == 2) {
-                strategiaInterfejs = new Strategia2("Twoje uprawy zostały zniszczone") ;
-                strategiaInterfejs.katastrofa();
+                katastrofaInterfejs = new KatastrofaUprawy("Twoje uprawy zostały zniszczone") ;
+                katastrofaInterfejs.katastrofa();
 
             } else if (wylosowanaLiczba == 3) {
-                strategiaInterfejs = new Strategia3("Twoje zwierzęta są chore, nie mogą teraz nic produkować");
-                strategiaInterfejs.katastrofa();
+                katastrofaInterfejs = new KatastrofaZwierzeta("Twoje zwierzęta umarły");
+                katastrofaInterfejs.katastrofa();
 
             } else if(wylosowanaLiczba == 4){
-                strategiaInterfejs = new Strategia4("Wygląda na to, że nie masz prądu. Niestety twoje przetwórnie teraz nie działają");
-                strategiaInterfejs.katastrofa();
+                katastrofaInterfejs = new KatastrofaPrzetwornie("Wygląda na to, że nie masz prądu. Niestety twoje przetwórnie teraz nie działają");
+                katastrofaInterfejs.katastrofa();
             }
         }
     }
@@ -243,37 +244,37 @@ public class Gra implements Serializable
         }
 
     }
-//    private void playMusic() {
-//        try {
-//            if (pozostalyCzas > 1) {
-//                URL url = this.getClass().getClassLoader().getResource("ost-farma-sample2.wav");
-//                AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-//                Clip clip = AudioSystem.getClip();
-//                clip.open(audioIn);
-//                FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-//                float range = volume.getMaximum() - volume.getMinimum();
-//                float gain = (range * 0.6f) + volume.getMinimum();
-//                volume.setValue(gain);
-//                clip.loop(Clip.LOOP_CONTINUOUSLY);
-//                clip.start();
-//
-//                // Dodajemy nowy wątek, który będzie sprawdzał pozostalyCzas co sekundę
-//                new Thread(() -> {
-//                    while (clip.isRunning()) {
-//                        if (pozostalyCzas < 10) {
-//                            clip.stop();
-//                            break;
-//                        }
-//                        try {
-//                            Thread.sleep(1000); // Czekamy sekundę przed kolejnym sprawdzeniem
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }).start();
-//            }
-//        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void playMusic() {
+        try {
+            if (pozostalyCzas > 1) {
+                URL url = this.getClass().getClassLoader().getResource("ost-farma-sample2.wav");
+                AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioIn);
+                FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                float range = volume.getMaximum() - volume.getMinimum();
+                float gain = (range * 0.6f) + volume.getMinimum();
+                volume.setValue(gain);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                clip.start();
+
+                // Dodajemy nowy wątek, który będzie sprawdzał pozostalyCzas co sekundę
+                new Thread(() -> {
+                    while (clip.isRunning()) {
+                        if (pozostalyCzas < 10) {
+                            clip.stop();
+                            break;
+                        }
+                        try {
+                            Thread.sleep(1000); // Czekamy sekundę przed kolejnym sprawdzeniem
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
 }
