@@ -28,7 +28,7 @@ public class StodolaPodglad extends JButton {
 
             if (Gra.getInstance().getPozostalyCzas() > 0)
             {
-                Map<Produkt, Integer> produkty = Gra.getInstance().getFarmaGracza().getStodola().getProdukty();
+                LinkedHashMap<Produkt, Integer> produkty = Gra.getInstance().getFarmaGracza().getStodola().getProdukty();
 
                 JDialog ramka = new JDialog();
                 ramka.setTitle("Stodoła");
