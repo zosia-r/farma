@@ -4,7 +4,6 @@ import GUI.OkienkoKatastrofa;
 import Gra.Gra;
 import Kawalek_Ziemi.Kawalek_Ziemi;
 import Kawalek_Ziemi.Przetwornia;
-import Strategia.Strategia;
 
 public class KatastrofaPrzetwornie implements Katastrofa
 {
