@@ -12,6 +12,7 @@ public class Produkt {
     private boolean gotoweDoZebrania;
     private int cena;
     private int cenaWytworzenia;
+    private int cenaZakupu;
     private int czasProdukcji;
     private File ikonka;
     private Timer odliczanieTimer;
@@ -19,14 +20,14 @@ public class Produkt {
     private long pozostalyCzas ;
     private String adresIkonki;
 
-    public Produkt(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int czasProdukcji, String adresIkonki)
+    public Produkt(String nazwa, boolean gotoweDoZebrania, int cena, int cenaWytworzenia, int cenaZakupu, int czasProdukcji, String adresIkonki)
     {
         this.nazwa = nazwa;
         this.gotoweDoZebrania = gotoweDoZebrania;
         this.cena = cena;
         this.cenaWytworzenia = cenaWytworzenia;
+        this.cenaZakupu = cenaZakupu;
         this.czasProdukcji = czasProdukcji;
-
         this.adresIkonki = adresIkonki;
 
         ikonka = new File(adresIkonki);
@@ -36,6 +37,10 @@ public class Produkt {
     public boolean getGotoweDoZebrania() { return gotoweDoZebrania; }
     public int getCena() { return cena; }
     public int getCenaWytworzenia() {return cenaWytworzenia; }
+    public int getCenaZakupu()
+    {
+        return cenaZakupu;
+    }
     public int getCzasProdukcji() { return czasProdukcji; }
     public String getAdresIkonki() { return adresIkonki; }
     public File getIkonka() { return ikonka; }
