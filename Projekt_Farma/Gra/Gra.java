@@ -219,7 +219,7 @@ public class Gra implements Serializable
                 strategiaInterfejs.katastrofa();
 
             } else if (wylosowanaLiczba == 3) {
-                strategiaInterfejs = new Strategia3();
+                strategiaInterfejs = new Strategia3("Twoje zwierzęta są chore, nie mogą teraz nic produkować");
                 strategiaInterfejs.katastrofa();
 
             } else if(wylosowanaLiczba == 4){
