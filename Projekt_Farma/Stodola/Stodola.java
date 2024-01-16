@@ -1,6 +1,7 @@
 package Stodola;
 
 import Produkt.Produkt;
+import Gra.Gra;
 
 import java.util.*;
 
@@ -38,7 +39,7 @@ public class Stodola {
     {
         return produkty;
     }
-    public void dodajProdukt(Produkt p)
+    public void dodajProdukt(Produkt p, int ile)
     {
         Set<Map.Entry<Produkt,Integer>> entries = produkty.entrySet();
         Iterator<Map.Entry<Produkt,Integer>> iteratorProduktow = entries.iterator();
@@ -47,7 +48,7 @@ public class Stodola {
             Map.Entry<Produkt,Integer> entry = iteratorProduktow.next();
             if(p.getNazwa().equals(entry.getKey().getNazwa()))
             {
-                entry.setValue(entry.getValue()+1);
+                entry.setValue(entry.getValue()+ile);
                 break;
             }
         }
@@ -80,6 +81,23 @@ public class Stodola {
                     entry.setValue(entry.getValue() - ile);
                 else
                     entry.setValue(0);
+                break;
+            }
+        }
+    }
+
+    public void kup (String nazwa, int ile)
+    {
+        Set<Map.Entry<Produkt,Integer>> entries = produkty.entrySet();
+        Iterator<Map.Entry<Produkt,Integer>> iteratorProduktow = entries.iterator();
+        while(iteratorProduktow.hasNext())
+        {
+            Map.Entry<Produkt,Integer> entry = iteratorProduktow.next();
+            if(nazwa.equals(entry.getKey().getNazwa()))
+            {
+                entry.setValue(entry.getValue() + ile);
+                dodajProdukt(getProdukt(nazwa), ile);
+                Gra.getInstance().odejmijMonety(ile*getCenaZakupuProduktu(nazwa));
                 break;
             }
         }
@@ -138,6 +156,16 @@ public class Stodola {
         {
             if (produkt.getNazwa().equals(nazwa))
                 return produkt.getCenaWytworzenia();
+        }
+        return 0;
+    }
+
+    public int getCenaZakupuProduktu(String nazwa)
+    {
+        for (Produkt produkt : produkty.keySet())
+        {
+            if (produkt.getNazwa().equals(nazwa))
+                return produkt.getCenaZakupu();
         }
         return 0;
     }
