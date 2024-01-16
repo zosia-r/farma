@@ -31,7 +31,7 @@ public class Sklep extends JButton {
             LinkedHashMap<Produkt, Integer> produkty = Gra.getInstance().getFarmaGracza().getStodola().getProdukty();
 
             JDialog ramka = new JDialog();
-            ramka.setTitle("Stodoła");
+            ramka.setTitle("Sklep");
             ramka.setFont(new Font("Monospaced", Font.BOLD, 15));
             ramka.setSize(400, 400);
             ramka.setResizable(false);
