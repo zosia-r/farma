@@ -64,7 +64,7 @@ public class Produkt {
     public void zbierz()
     {
         if(gotoweDoZebrania) {
-            Gra.getInstance().getFarmaGracza().getStodola().dodajProdukt(this);
+            Gra.getInstance().getFarmaGracza().getStodola().dodajProdukt(this, 1);
             //usuwanie z tablicy upraw/zwierzat/przetworow
         }
         else
