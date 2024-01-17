@@ -4,16 +4,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
 
-import Katastrofa.*;
+import Zdarzenie.*;
 import Ranking.Ranking;
-import java.io.ObjectOutput;
+
 import java.io.*;
 import java.util.*;
 import java.util.Random;
-import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
-import java.io.IOException;
 import java.net.URL;
 import javax.sound.sampled.FloatControl;
 
@@ -24,7 +22,7 @@ public class Gra implements Serializable
     private int liczbaMonet;   // 200 na początku gry
     private int pozostalyCzas; // w sekundach
     private static Farma farmaGracza; // farma gracza
-    Katastrofa katastrofaInterfejs;
+    Zdarzenie zdarzenieInterfejs;
 
     private static ArrayList<String> Wyniki; //zeby stad pobrac dane do wyswietlanego rankingu
     private static int MonetyNaKoniec; //zeby uzyc w statycznej metodzie serializacji
@@ -38,7 +36,7 @@ public class Gra implements Serializable
         this.pozostalyCzas = CZAS_STARTOWY;
         this.farmaGracza = new Farma();
         startTimer();
-        uruchomTimerDoKatastrof();
+        uruchomTimerDoZdarzen();
         this.Wyniki = new ArrayList<>();
         this.tabwynikow = new TablicaWynikow();
         //playMusic();
@@ -195,43 +193,56 @@ public class Gra implements Serializable
 
 
 
-    public void uruchomTimerDoKatastrof() {
+    public void uruchomTimerDoZdarzen() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                wywolanieKatastrofy();
+                wywolanieZdarzenia();
             }
-        }, 0, 20 * 1000);  // timer wywoluje metode katastrofa() co 20s
+        }, 0, 20 * 1000);  // timer wywoluje metode zdarzenie() co 20s
     }
-    public void wywolanieKatastrofy() {
+    public void wywolanieZdarzenia() {
 
-        if (CzyBedzieKatastrofa() == 1 && pozostalyCzas>1 && pozostalyCzas<299) {
+        if (CzyBedzieZdarzenie() == 1 && pozostalyCzas>1 && pozostalyCzas<299) {
 
             Random random = new Random();
-            int wylosowanaLiczba = random.nextInt(4) + 1;
+            int wylosowanaLiczba = random.nextInt(7) + 1;
 
             if (wylosowanaLiczba == 1) {
-                katastrofaInterfejs = new KatastrofaStodola("Twoja stodoła spłonęła. Tracisz wszystkie produkty");
-                katastrofaInterfejs.katastrofa();
+                zdarzenieInterfejs = new KatastrofaStodola("Twoja stodoła spłonęła. Tracisz wszystkie produkty");
+                zdarzenieInterfejs.zdarzenie();
 
             } else if (wylosowanaLiczba == 2) {
-                katastrofaInterfejs = new KatastrofaUprawy("Twoje uprawy zostały zniszczone") ;
-                katastrofaInterfejs.katastrofa();
+                zdarzenieInterfejs = new KatastrofaUprawy("Twoje uprawy zostały zniszczone") ;
+                zdarzenieInterfejs.zdarzenie();
 
             } else if (wylosowanaLiczba == 3) {
-                katastrofaInterfejs = new KatastrofaZwierzeta("Twoje zwierzęta umarły");
-                katastrofaInterfejs.katastrofa();
+                zdarzenieInterfejs = new KatastrofaZwierzeta("Twoje zwierzęta umarły");
+                zdarzenieInterfejs.zdarzenie();
 
             } else if(wylosowanaLiczba == 4){
-                katastrofaInterfejs = new KatastrofaPrzetwornie("Wygląda na to, że nie masz prądu. Niestety twoje przetwórnie teraz nie działają");
-                katastrofaInterfejs.katastrofa();
+                zdarzenieInterfejs = new KatastrofaPrzetwornie("Wygląda na to, że nie masz prądu. Niestety twoje przetwórnie teraz nie działają");
+                zdarzenieInterfejs.zdarzenie();
+
+            } else if (wylosowanaLiczba == 5) {
+                zdarzenieInterfejs = new PodniesienieCen("Ceny wszystkich produktów zostały podniesione");
+                zdarzenieInterfejs.zdarzenie();
+
+            } else if (wylosowanaLiczba == 6) {
+                zdarzenieInterfejs = new SkrocenieCzasuTworzenia("Wszystkie produkty tworzą się teraz szybciej");
+                zdarzenieInterfejs.zdarzenie();
+
+            } else if (wylosowanaLiczba == 7) {
+                zdarzenieInterfejs = new DodanieMonet("Dostałeś dofinansowanie +50 monet");
+                zdarzenieInterfejs.zdarzenie();
+
             }
         }
     }
-    public int CzyBedzieKatastrofa()
+    public int CzyBedzieZdarzenie()
     {
-        // prawdopodobieństwa dla 1(bedzie katastrofa) i 0 (nie bedzie katastrofy) -w procentach
+        // prawdopodobieństwa dla 1(wywoła się zdarzenie) i 0 (nie wywoła się zdarzenie) -w procentach
         double prawdopodobienstwo_1 = 25;
         double prawdopodobienstwo_0 = 100 - prawdopodobienstwo_1;
 
