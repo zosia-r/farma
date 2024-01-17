@@ -5,11 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class OkienkoKatastrofa extends JDialog {
+public class OkienkoZdarzenie extends JDialog {
 
-    public OkienkoKatastrofa(String komunikat)
+    public OkienkoZdarzenie(String komunikat)
     {
-        setTitle("Katastrofa");
+        setTitle("Zdarzenie");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(400,150);
         setLocationRelativeTo(null);
@@ -27,7 +27,7 @@ public class OkienkoKatastrofa extends JDialog {
 
         panel.add(Box.createRigidArea(new Dimension(0,10)));
 
-        JButton button = new JButton("Ok :c");
+        JButton button = new JButton("Ok");
         button.setFocusable(false);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setFont(new Font("Monospaced", Font.BOLD, 12));
@@ -35,7 +35,7 @@ public class OkienkoKatastrofa extends JDialog {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OkienkoKatastrofa.this.dispose();
+                OkienkoZdarzenie.this.dispose();
             }
         });
         panel.add(button);
