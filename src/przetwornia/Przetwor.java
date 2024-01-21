@@ -85,6 +85,7 @@ public class Przetwor extends Produkt {
     
     public void ZabranieSkladnikow (Produkt produkt) {
     	if (produkt.getNazwa().equals("chleb pszenny")) {
+    		Stodola stodola = Gra.getInstance().getFarmaGracza().getStodola();
     		if ((Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("pszenica") > 0) && (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("jajka") > 0)) {
 				Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(Gra.getInstance().getFarmaGracza().getStodola().getProdukt("pszenica"));
 				Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(Gra.getInstance().getFarmaGracza().getStodola().getProdukt("jajka"));
@@ -111,17 +112,17 @@ public class Przetwor extends Produkt {
 			}
 			else System.out.println("Zabraklo skladnikow!!!!!!!!!!!!!");
     	} else if (produkt.getNazwa().equals("sok jabłkowy")) {
-			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("jabłka") > 1) {
+			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("jabłka") > 0) {
 				Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(Gra.getInstance().getFarmaGracza().getStodola().getProdukt("jabłka"));
 			}
 			else System.out.println("Zabraklo skladnikow!!!!!!!!!!!!!");
     	} else if (produkt.getNazwa().equals("sok gruszkowy")) {
-			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("gruszki") > 1) {
+			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("gruszki") > 0) {
 				Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(Gra.getInstance().getFarmaGracza().getStodola().getProdukt("gruszki"));
 			}
 			else System.out.println("Zabraklo skladnikow!!!!!!!!!!!!!");
     	} else if (produkt.getNazwa().equals("masło")) {
-			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("mleko") > 1) {
+			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("mleko") > 0) {
 				Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(Gra.getInstance().getFarmaGracza().getStodola().getProdukt("mleko"));
 			}
 			else System.out.println("Zabraklo skladnikow!!!!!!!!!!!!!");
@@ -132,7 +133,7 @@ public class Przetwor extends Produkt {
 			}
 			else System.out.println("Zabraklo skladnikow!!!!!!!!!!!!!");
     	} else if (produkt.getNazwa().equals("kiełbasa")) {
-			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("mięso") > 1) {
+			if (Gra.getInstance().getFarmaGracza().getStodola().sprawdzDostepnosc("mięso") > 0) {
 				Gra.getInstance().getFarmaGracza().getStodola().usunProdukt(Gra.getInstance().getFarmaGracza().getStodola().getProdukt("mięso"));
 			}
 			else System.out.println("Zabraklo skladnikow!!!!!!!!!!!!!");
@@ -146,10 +147,7 @@ public class Przetwor extends Produkt {
         setGotoweDoZebrania(false);
         getWzrostTimer().cancel();
         getOdliczanieTimer().cancel();
-        //for (int i = 0; i <= iloscPotrzebnegoProduktu; i++) {
-        //    Gra.getInstance().getFarmaGracza().getStodola().dodajProdukt(ProduktPotrzebnyDoWyprodukowania);
-        //}
-
+        
     }
 
 }
